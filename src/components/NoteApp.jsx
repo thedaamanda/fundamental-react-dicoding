@@ -1,4 +1,6 @@
 import React from 'react';
+import NoteHeader from './NoteHeader';
+import NoteBody from './NoteBody';
 
 class NoteApp extends React.Component {
     constructor(props) {
@@ -8,7 +10,8 @@ class NoteApp extends React.Component {
     render() {
         return (
             <div className="note-app">
-                <h1>Aplikasi Catatan</h1>
+                <NoteHeader />
+                <NoteBody />
             </div>
         );
     }
