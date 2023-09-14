@@ -1,10 +1,10 @@
 import React from 'react'
 
-function NoteItemBody() {
+function NoteItemBody({ title, body }) {
     return (
         <>
-            <h4 className="title">Catatan A</h4>
-            <p className="body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
+            <h4 className="title">{title}</h4>
+            <p className="body">{body}</p>
         </>
     )
 }
