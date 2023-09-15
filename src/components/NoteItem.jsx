@@ -8,7 +8,7 @@ function NoteItem({ id, title, body, archived, createdAt, onDelete, onArchived }
         <div className="list-content" id={id}>
             <NoteItemDate date={createdAt} />
             <NoteItemBody title={title} body={body} />
-            <ActionButton id={id} onDelete={onDelete} onArchived={onArchived} />
+            <ActionButton id={id} archived={archived} onDelete={onDelete} onArchived={onArchived} />
         </div>
     )
 }
