@@ -1,12 +1,16 @@
 import React from 'react';
-import NoteSearch from './Search';
+import Search from './Search';
 import NoteList from './NoteList';
 import NoteContainer from './NoteContainer';
 
-function NoteBody({ notes, onDelete, onArchived, onSearch }) {
+function NoteBody({ notes, onDelete, onArchived, searchKeyword, onSearch }) {
+    if (searchKeyword) {
+        notes = notes.filter(note => note.title.toLowerCase().includes(searchKeyword.toLowerCase()));
+    }
+
     return (
         <section className="result-section">
-            <NoteSearch onSearch={onSearch} />
+            <Search onSearch={onSearch} />
             <div className="padding-tb">
                 <div className="result-container">
                     <div className="row-center-padding" id="list-note">

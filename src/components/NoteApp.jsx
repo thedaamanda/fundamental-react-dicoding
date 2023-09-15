@@ -11,7 +11,8 @@ class NoteApp extends React.Component {
         super(props);
 
         this.state = {
-            notes: getInitialData()
+            notes: getInitialData(),
+            searchKeyword: '',
         }
 
         this.onAddNoteHandler = this.onAddNoteHandler.bind(this);
@@ -67,28 +68,15 @@ class NoteApp extends React.Component {
         }
     }
 
-    onSearchHandler(query) {
-        if (!query) {
-            this.setState({ notes: getInitialData() });
-            return;
-        }
-
-        const notes = this.state.notes.filter(note => {
-            const title = note.title.toLowerCase();
-            const body = note.body.toLowerCase();
-            const q = query.toLowerCase();
-
-            return title.includes(q) || body.includes(q);
-        });
-
-        this.setState({ notes });
+    onSearchHandler(keyword) {
+        this.setState({ searchKeyword: keyword });
     }
 
     render() {
         return (
             <div>
                 <NoteHeader addNote={this.onAddNoteHandler} />
-                <NoteBody notes={this.state.notes} onDelete={this.onDeleteHandler} onArchived={this.onArchivedHandler} onSearch={this.onSearchHandler} />
+                <NoteBody notes={this.state.notes} onDelete={this.onDeleteHandler} onArchived={this.onArchivedHandler} searchKeyword={this.state.searchKeyword} onSearch={this.onSearchHandler} />
                 <ToastContainer
                     position="top-right"
                     autoClose={3000}

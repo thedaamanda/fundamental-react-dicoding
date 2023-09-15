@@ -4,7 +4,6 @@ import Header from './components/layouts/Header';
 import NoteApp from './components/NoteApp';
 import Footer from './components/layouts/Footer';
 
-// styling
 import './styles/style.css';
 import './styles/responsive.css';
 
