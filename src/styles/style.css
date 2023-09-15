@@ -217,6 +217,13 @@ a {
     position: relative;
 }
 
+.note-wrapper .title-length {
+    color: var(--color-body);
+    font-size: 15px;
+    font-weight: 600;
+    text-align: right;
+}
+
 .note-wrapper .field-group input {
     height: 60px;
     border: 1px solid transparent;

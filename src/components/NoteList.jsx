@@ -16,7 +16,7 @@ function NoteList({ noteList, onDelete, onArchived }) {
             :
             <div className="empty-state">
                 <h3 className="title">Tidak ada catatan</h3>
-                <p className="body">Catatan yang anda buat akan muncul disini</p>
+                <p className="body">Silahkan tambahkan catatan baru</p>
             </div>
         }
     </div>

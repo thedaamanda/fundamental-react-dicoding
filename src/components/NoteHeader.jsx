@@ -2,7 +2,7 @@ import React from 'react';
 import NoteInput from './NoteInput';
 import ImageHeader from './ImageHeader';
 
-function NoteHeader() {
+function NoteHeader({ addNote }) {
     return (
         <section className="note-section">
             <div className="note-container">
@@ -12,7 +12,7 @@ function NoteHeader() {
                     </div>
                     <div className="flex-item-right">
                         <div className="note-wrapper">
-                            <NoteInput />
+                            <NoteInput addNote={addNote} />
                         </div>
                     </div>
                 </div>

@@ -14,16 +14,40 @@ class NoteApp extends React.Component {
             notes: getInitialData()
         }
 
+        this.onAddNoteHandler = this.onAddNoteHandler.bind(this);
         this.onDeleteHandler = this.onDeleteHandler.bind(this);
         this.onArchivedHandler = this.onArchivedHandler.bind(this);
         this.onSearchHandler = this.onSearchHandler.bind(this);
+    }
+
+    onAddNoteHandler({ title, body }) {
+        try {
+            this.setState((prevState) => {
+                return {
+                    notes: [
+                        ...prevState.notes,
+                        {
+                            id: +new Date(),
+                            title,
+                            body,
+                            archived: false,
+                            createdAt: new Date(),
+                        },
+                    ],
+                };
+            });
+
+            toast.success("Catatan berhasil ditambahkan");
+        } catch (error) {
+            toast.error("Catatan gagal ditambahkan");
+        }
     }
 
     onDeleteHandler(id) {
         const notes = this.state.notes.filter(note => note.id !== id);
         this.setState({ notes });
 
-        toast.success("Catatan berhasil dihapus");
+        toast.success("Catatan telah dihapus");
     }
 
     onArchivedHandler(id) {
@@ -39,7 +63,7 @@ class NoteApp extends React.Component {
         if (notes.find(note => note.id === id).archived) {
             toast.success("Catatan berhasil diarsipkan");
         } else {
-            toast.success("Catatan berhasil dipulihkan");
+            toast.success("Catatan dipulihkan dari arsip");
         }
     }
 
@@ -63,7 +87,7 @@ class NoteApp extends React.Component {
     render() {
         return (
             <div>
-                <NoteHeader />
+                <NoteHeader addNote={this.onAddNoteHandler} />
                 <NoteBody notes={this.state.notes} onDelete={this.onDeleteHandler} onArchived={this.onArchivedHandler} onSearch={this.onSearchHandler} />
                 <ToastContainer
                     position="top-right"
@@ -73,7 +97,7 @@ class NoteApp extends React.Component {
                     rtl={false}
                     pauseOnFocusLoss
                     pauseOnHover
-                    />
+                    theme="colored" />
             </div>
         );
     }

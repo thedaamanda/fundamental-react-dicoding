@@ -8,7 +8,7 @@ function Header() {
                 <div className="header-center">
                     <div className="brand-logo">
                         <a href="#">
-                            <h1>Note Apps</h1>
+                            <h1>Note App</h1>
                         </a>
                     </div>
                 </div>
