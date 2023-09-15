@@ -29,9 +29,6 @@ class Search extends React.Component {
                             </div>
                             <form className="search-box-form" id="search-note-form">
                                 <input type="text" placeholder="Masukkan Judul Catatan" id="search" name="search" onKeyUp={(() => this.props.onSearch(this.state.keyword))} onChange={this.onSearchChange} />
-                                <button type="submit" name="submit" className="template-btn secondary-bg">
-                                    Cari Catatan
-                                </button>
                             </form>
                         </div>
                     </div>
