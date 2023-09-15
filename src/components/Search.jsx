@@ -1,6 +1,11 @@
 import React from 'react';
 
-function NoteSearch() {
+function NoteSearch({ onSearch }) {
+    const onSearchChange = (e) => {
+        const query = e.target.value;
+        onSearch(query);
+    }
+
     return (
         <div className="search-container">
             <div className="seo-search-box particle">
@@ -13,7 +18,7 @@ function NoteSearch() {
                             <p>Masukkan judul catatan untuk melakukan pencarian catatan</p>
                         </div>
                         <form className="search-box-form" id="search-note-form">
-                            <input type="text" placeholder="Masukkan Judul Catatan" id="search" required />
+                            <input type="text" placeholder="Masukkan Judul Catatan" id="search" name="search" onChange={onSearchChange} />
                             <button type="submit" name="submit" className="template-btn secondary-bg">
                                 Cari Catatan
                             </button>

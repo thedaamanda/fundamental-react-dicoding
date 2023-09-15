@@ -1,6 +1,6 @@
 import React from 'react';
 import NoteInput from './NoteInput';
-import manageImg from '/images/manage-data.png';
+import ImageHeader from './ImageHeader';
 
 function NoteHeader() {
     return (
@@ -8,9 +8,7 @@ function NoteHeader() {
             <div className="note-container">
                 <div className="row-center">
                     <div className="flex-item-left d-none">
-                        <div className="preview-image">
-                            <img src={manageImg} alt="Manage Image" />
-                        </div>
+                        <ImageHeader />
                     </div>
                     <div className="flex-item-right">
                         <div className="note-wrapper">

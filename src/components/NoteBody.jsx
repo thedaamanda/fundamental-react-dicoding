@@ -1,16 +1,21 @@
 import React from 'react';
 import NoteSearch from './Search';
 import NoteList from './NoteList';
+import NoteContainer from './NoteContainer';
 
-function NoteBody({ notes }) {
+function NoteBody({ notes, onArchived, onSearch }) {
     return (
         <section className="result-section">
-            <NoteSearch />
+            <NoteSearch onSearch={onSearch} />
             <div className="padding-tb">
                 <div className="result-container">
                     <div className="row-center-padding" id="list-note">
-                        <NoteList noteList={notes.filter(note => note.archived === false)} />
-                        <NoteList noteList={notes.filter(note => note.archived === true)} />
+                        <NoteContainer tagline="Daftar Catatan" noteTitle="Catatan Aktif">
+                            <NoteList noteList={notes.filter(note => note.archived === false)} onArchived={onArchived} />
+                        </NoteContainer>
+                        <NoteContainer tagline="Daftar Catatan" noteTitle="Catatan Arsip">
+                            <NoteList noteList={notes.filter(note => note.archived === true)} onArchived={onArchived} />
+                        </NoteContainer>
                     </div>
                 </div>
             </div>
