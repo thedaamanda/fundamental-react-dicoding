@@ -1,7 +1,7 @@
 import React from 'react';
 import NoteItem from './NoteItem';
 
-function NoteList({ noteList, onArchived }) {
+function NoteList({ noteList, onDelete, onArchived }) {
  return (
     <div className="list-result">
         { noteList.length ?
@@ -9,6 +9,7 @@ function NoteList({ noteList, onArchived }) {
                 <NoteItem
                     key={note.id}
                     id={note.id}
+                    onDelete={onDelete}
                     onArchived={onArchived}
                     {...note} />
             ))

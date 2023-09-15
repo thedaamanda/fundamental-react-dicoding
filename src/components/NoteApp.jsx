@@ -1,7 +1,10 @@
 import React from 'react';
+import { getInitialData } from '../utils/data';
+import { ToastContainer, toast } from 'react-toastify';
+
 import NoteHeader from './NoteHeader';
 import NoteBody from './NoteBody';
-import { getInitialData } from '../utils/data';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 class NoteApp extends React.Component {
     constructor(props) {
@@ -11,8 +14,16 @@ class NoteApp extends React.Component {
             notes: getInitialData()
         }
 
+        this.onDeleteHandler = this.onDeleteHandler.bind(this);
         this.onArchivedHandler = this.onArchivedHandler.bind(this);
         this.onSearchHandler = this.onSearchHandler.bind(this);
+    }
+
+    onDeleteHandler(id) {
+        const notes = this.state.notes.filter(note => note.id !== id);
+        this.setState({ notes });
+
+        toast.success("Catatan berhasil dihapus");
     }
 
     onArchivedHandler(id) {
@@ -24,6 +35,12 @@ class NoteApp extends React.Component {
         });
 
         this.setState({ notes });
+
+        if (notes.find(note => note.id === id).archived) {
+            toast.success("Catatan berhasil diarsipkan");
+        } else {
+            toast.success("Catatan berhasil dipulihkan");
+        }
     }
 
     onSearchHandler(query) {
@@ -45,9 +62,18 @@ class NoteApp extends React.Component {
 
     render() {
         return (
-            <div className="note-app">
+            <div>
                 <NoteHeader />
-                <NoteBody notes={this.state.notes} onArchived={this.onArchivedHandler} onSearch={this.onSearchHandler} />
+                <NoteBody notes={this.state.notes} onDelete={this.onDeleteHandler} onArchived={this.onArchivedHandler} onSearch={this.onSearchHandler} />
+                <ToastContainer
+                    position="top-right"
+                    autoClose={3000}
+                    hideProgressBar={true}
+                    newestOnTop={false}
+                    rtl={false}
+                    pauseOnFocusLoss
+                    pauseOnHover
+                    />
             </div>
         );
     }

@@ -3,7 +3,7 @@ import NoteSearch from './Search';
 import NoteList from './NoteList';
 import NoteContainer from './NoteContainer';
 
-function NoteBody({ notes, onArchived, onSearch }) {
+function NoteBody({ notes, onDelete, onArchived, onSearch }) {
     return (
         <section className="result-section">
             <NoteSearch onSearch={onSearch} />
@@ -11,10 +11,10 @@ function NoteBody({ notes, onArchived, onSearch }) {
                 <div className="result-container">
                     <div className="row-center-padding" id="list-note">
                         <NoteContainer tagline="Daftar Catatan" noteTitle="Catatan Aktif">
-                            <NoteList noteList={notes.filter(note => note.archived === false)} onArchived={onArchived} />
+                            <NoteList noteList={notes.filter(note => note.archived === false)} onDelete={onDelete} onArchived={onArchived} />
                         </NoteContainer>
                         <NoteContainer tagline="Daftar Catatan" noteTitle="Catatan Arsip">
-                            <NoteList noteList={notes.filter(note => note.archived === true)} onArchived={onArchived} />
+                            <NoteList noteList={notes.filter(note => note.archived === true)} onDelete={onDelete} onArchived={onArchived} />
                         </NoteContainer>
                     </div>
                 </div>
