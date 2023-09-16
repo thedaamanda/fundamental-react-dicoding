@@ -1,5 +1,7 @@
 import React from 'react';
 
+const CHAR_LIMIT = 50;
+
 class NoteInput extends React.Component {
     constructor(props) {
         super(props);
@@ -7,7 +9,6 @@ class NoteInput extends React.Component {
         this.state = {
             title: '',
             body: '',
-            maxTitleLength: 50,
         }
 
         this.onTitleChangeHandler = this.onTitleChangeHandler.bind(this);
@@ -16,7 +17,7 @@ class NoteInput extends React.Component {
     }
 
     onTitleChangeHandler(event) {
-        if (event.target.value.length <= this.state.maxTitleLength) {
+        if (event.target.value.length <= CHAR_LIMIT) {
             this.setState(() => {
                 return {
                     title: event.target.value,
@@ -39,7 +40,7 @@ class NoteInput extends React.Component {
     }
 
     render() {
-        const remainingTitleLength = this.state.maxTitleLength - this.state.title.length;
+        const remainingTitleLength = CHAR_LIMIT - this.state.title.length;
 
         return (
             <form id="note-form" onSubmit={this.onFormSubmitHandler}>
