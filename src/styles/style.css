@@ -285,6 +285,7 @@ a {
 .search-container {
     width: 80%;
     margin: 0 auto;
+    padding-top: 100px;
     padding-right: 15px;
     padding-left: 15px;
 }
@@ -305,8 +306,6 @@ a {
 }
 
 .row-center-padding {
-    display: flex;
-    flex-direction: row;
     margin-right: -15px;
     margin-left: -15px;
 }
@@ -333,7 +332,6 @@ a {
 }
 
 .result-section .padding-tb {
-    background-color: #1b202f;
     padding-bottom: 130px;
     padding-top: 320px;
 }
