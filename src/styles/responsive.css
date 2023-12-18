@@ -34,6 +34,10 @@
 }
 
 @media (max-width: 767px) {
+    .result-container {
+        width: 90%;
+    }
+
     .search-container {
         width: 100%;
         max-width: 1200px;

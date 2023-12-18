@@ -1,28 +1,27 @@
 import React from 'react';
-import { getActiveNotes } from '../utils/local-data';
+import { getArchivedNotes } from '../utils/local-data';
 
 import Search from '../components/Search';
 import NoteList from '../components/NoteList';
 import NoteContainer from '../components/NoteContainer';
-import HomePageAction from '../components/HomePageAction';
 import { useSearchParams } from 'react-router-dom';
 
-function HomePageWrapper() {
+function ArchivedPageWrapper() {
     const [searchParams, setSearchParams] = useSearchParams();
     const keyword = searchParams.get('keyword');
     function changeSearchParams(keyword) {
       setSearchParams({ keyword });
     }
 
-    return <HomePage defaultKeyword={keyword} keywordChange={changeSearchParams} />
+    return <ArchivedPage defaultKeyword={keyword} keywordChange={changeSearchParams} />
 }
 
-class HomePage extends React.Component {
+class ArchivedPage extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            notes: getActiveNotes(),
+            notes: getArchivedNotes(),
             searchKeyword: props.defaultKeyword || '',
         }
 
@@ -42,18 +41,17 @@ class HomePage extends React.Component {
                     <Search searchKeyword={this.state.searchKeyword} onSearch={this.onSearchHandler} />
                     <div className="padding-tb">
                         <div className="result-container">
-                            <div className="row-center-padding" id="list-active-note">
-                                <NoteContainer tagline="Daftar Catatan" noteTitle="Catatan Aktif">
+                            <div className="row-center-padding" id="list-archived-note">
+                                <NoteContainer tagline="Daftar Catatan" noteTitle="Catatan Arsip">
                                     <NoteList noteList={notes} />
                                 </NoteContainer>
                             </div>
                         </div>
                     </div>
                 </section>
-                <HomePageAction />
             </div>
         );
     }
 }
 
-export default HomePageWrapper;
+export default ArchivedPageWrapper;
