@@ -6,7 +6,7 @@ function NoteItem({ id, title, body, createdAt }) {
     return (
         <div className="list-content" id={id}>
             <NoteItemDate date={createdAt} />
-            <NoteItemBody title={title} body={body} />
+            <NoteItemBody id={id} title={title} body={body} />
         </div>
     )
 }

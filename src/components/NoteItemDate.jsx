@@ -1,5 +1,5 @@
 import React from 'react'
-import { showFormattedDate } from "../utils/data";
+import { showFormattedDate } from "../utils/index";
 
 function NoteItemDate({ date }) {
     return (

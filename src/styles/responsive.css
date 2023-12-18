@@ -31,6 +31,10 @@
     .modal-content {
         width: 80%;
     }
+
+    .error-wrapper {
+        padding: 100px;
+    }
 }
 
 @media (max-width: 767px) {
