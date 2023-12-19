@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 function DetailPageAction ({ id, archived, onArchive, onDelete }) {
     return (
@@ -15,6 +15,13 @@ function DetailPageAction ({ id, archived, onArchive, onDelete }) {
             </button>
         </div>
     );
+}
+
+DetailPageAction.propTypes = {
+    id: PropTypes.string.isRequired,
+    archived: PropTypes.bool.isRequired,
+    onArchive: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired,
 }
 
 export default DetailPageAction;

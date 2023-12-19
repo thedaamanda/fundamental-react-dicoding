@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import { showFormattedDate } from "../utils/index";
 
 function NoteItemDate({ date }) {
@@ -15,6 +16,10 @@ function NoteItemDate({ date }) {
             </li>
         </ul>
     )
+}
+
+NoteItemDate.propTypes = {
+    date: PropTypes.string.isRequired,
 }
 
 export default NoteItemDate

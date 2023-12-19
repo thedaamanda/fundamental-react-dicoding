@@ -1,18 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Search extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            keyword: '',
+            keyword: props.defaultKeyword || '',
         }
 
         this.onSearchChange = this.onSearchChange.bind(this);
     }
 
     onSearchChange(event) {
-        this.setState({ keyword: event.target.value });
+        const keyword = event.target.value;
+        this.setState({ keyword });
+
+        this.props.onSearch(keyword);
     }
 
     render() {
@@ -28,7 +32,7 @@ class Search extends React.Component {
                                 <p>Masukkan judul catatan untuk melakukan pencarian catatan</p>
                             </div>
                             <form className="search-box-form" id="search-note-form">
-                                <input type="text" placeholder="Masukkan Judul Catatan" id="search" name="search" onKeyUp={(() => this.props.onSearch(this.state.keyword))} onChange={this.onSearchChange} />
+                                <input type="text" placeholder="Masukkan Judul Catatan" id="search" name="keyword" value={this.state.keyword} onChange={this.onSearchChange} />
                             </form>
                         </div>
                     </div>
@@ -37,6 +41,11 @@ class Search extends React.Component {
             </div>
         )
     }
+}
+
+Search.propTypes = {
+    searchKeyword: PropTypes.string.isRequired,
+    onSearch: PropTypes.func.isRequired,
 }
 
 export default Search;

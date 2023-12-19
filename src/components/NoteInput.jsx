@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const CHAR_LIMIT = 50;
 
@@ -63,6 +64,10 @@ class NoteInput extends React.Component {
             </form>
         );
     }
+}
+
+NoteInput.propTypes = {
+    addNote: PropTypes.func.isRequired,
 }
 
 export default NoteInput;

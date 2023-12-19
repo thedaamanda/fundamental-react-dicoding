@@ -1,6 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getArchivedNotes } from '../utils/local-data';
-
 import Search from '../components/Search';
 import NoteList from '../components/NoteList';
 import NoteContainer from '../components/NoteContainer';
@@ -29,7 +29,13 @@ class ArchivedPage extends React.Component {
     }
 
     onSearchHandler(keyword) {
-        this.setState({ searchKeyword: keyword });
+        this.setState(() => {
+            return {
+                searchKeyword: keyword,
+            };
+        });
+
+        this.props.keywordChange(keyword);
     }
 
     render() {
@@ -52,6 +58,11 @@ class ArchivedPage extends React.Component {
             </div>
         );
     }
+}
+
+ArchivedPage.propTypes = {
+    keywordChange: PropTypes.func.isRequired,
+    defaultKeyword: PropTypes.string
 }
 
 export default ArchivedPageWrapper;

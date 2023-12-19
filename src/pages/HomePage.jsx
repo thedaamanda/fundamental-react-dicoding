@@ -1,6 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getActiveNotes } from '../utils/local-data';
-
 import Search from '../components/Search';
 import NoteList from '../components/NoteList';
 import NoteContainer from '../components/NoteContainer';
@@ -30,7 +30,13 @@ class HomePage extends React.Component {
     }
 
     onSearchHandler(keyword) {
-        this.setState({ searchKeyword: keyword });
+        this.setState(() => {
+            return {
+                searchKeyword: keyword,
+            };
+        });
+
+        this.props.keywordChange(keyword);
     }
 
     render() {
@@ -54,6 +60,11 @@ class HomePage extends React.Component {
             </div>
         );
     }
+}
+
+HomePage.propTypes = {
+    keywordChange: PropTypes.func.isRequired,
+    defaultKeyword: PropTypes.string
 }
 
 export default HomePageWrapper;
