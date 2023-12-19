@@ -8,4 +8,8 @@ const showFormattedDate = (date) => {
     return new Date(date).toLocaleDateString('id-ID', options);
 };
 
-export { showFormattedDate };
+const extractContent = (html) => new DOMParser()
+  .parseFromString(html, 'text/html')
+  .documentElement.textContent
+
+export { showFormattedDate, extractContent };

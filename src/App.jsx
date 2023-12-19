@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/layouts/Header';
-import Footer from './components/layouts/Footer';
 import { ToastContainer } from 'react-toastify';
 
 import HomePage from './pages/HomePage';
@@ -23,7 +22,6 @@ function App() {
                     <Route path="*" element={<NotFound/>} />
                 </Routes>
             </main>
-            {/* <Footer /> */}
             <ToastContainer
                 position="top-right"
                 autoClose={1500}

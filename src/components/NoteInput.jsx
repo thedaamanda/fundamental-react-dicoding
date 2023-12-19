@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import parser from 'html-react-parser';
 
 const CHAR_LIMIT = 50;
 
@@ -30,7 +31,7 @@ class NoteInput extends React.Component {
     onBodyChangeHandler(event) {
         this.setState(() => {
             return {
-                body: event.target.value,
+                body: event.target.innerHTML,
             };
         });
     }
@@ -54,8 +55,22 @@ class NoteInput extends React.Component {
                         <div className="title-length">Sisa Karakter: {remainingTitleLength}</div>
                         <input type="text" placeholder="Isi Judul" id="inputNoteTitle" value={this.state.title} onChange={this.onTitleChangeHandler} required />
                     </div>
-                    <div className="field-group">
-                        <textarea placeholder="Tuliskan Catatanmu disini ..." id="inputBodyDescription" rows="5" value={this.state.body} onChange={this.onBodyChangeHandler} required></textarea>
+                    <div className="field-group add-new-page__input">
+                        {/* <textarea placeholder="Tuliskan Catatanmu disini ..." id="inputBodyDescription" rows="5" value={this.state.body} onChange={this.onBodyChangeHandler} contentEditable='true' suppressContentEditableWarning={true} required></textarea> */}
+                        {/* <div contentEditable='true' suppressContentEditableWarning={true} id="inputBodyDescription" data-placeholder="Tuliskan Catatanmu disini ..." spellCheck='false' onInput={this.onBodyChangeHandler}>
+                            {parser(this.state.body)}
+                        </div> */}
+                        <div
+                            className='add-new-page__input__body'
+                            contentEditable='true'
+                            data-placeholder='Sebenarnya saya adalah ....'
+                            onInput={this.onBodyChangeHandler}
+                            spellCheck='false'
+                            suppressContentEditableWarning={true}
+                        >
+                            {/* {parser(this.state.body)} */}
+                        </div>
+
                     </div>
                     <div className="field-group">
                         <button value="submit" id="btnSubmitForm">Buat Catatan</button>

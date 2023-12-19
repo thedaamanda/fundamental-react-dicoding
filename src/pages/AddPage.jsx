@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { addNote } from '../utils/local-data';
 import NoteInput from '../components/NoteInput';
 import ImageHeader from '../components/ImageHeader';
+import { toast } from 'react-toastify';
 
 function AddPage() {
     const navigate = useNavigate();

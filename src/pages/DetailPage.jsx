@@ -19,7 +19,7 @@ class DetailPage extends React.Component {
         super(props);
 
         this.state = {
-            notes: getNote(props.id)
+            note: getNote(props.id)
         };
 
         this.onArchiveHandler = this.onArchiveHandler.bind(this);
@@ -27,7 +27,7 @@ class DetailPage extends React.Component {
     }
 
     onArchiveHandler(id) {
-        if(this.state.notes.archived) {
+        if(this.state.note.archived) {
             unarchiveNote(id);
             toast.success("Catatan dipulihkan dari arsip");
         } else {
@@ -46,7 +46,7 @@ class DetailPage extends React.Component {
     }
 
     render() {
-        if (!this.state.notes) {
+        if (!this.state.note) {
             return <NotFound />;
         }
 
@@ -55,11 +55,11 @@ class DetailPage extends React.Component {
                 <section className="result-section">
                     <div className="padding-detail">
                         <div className="result-container">
-                            <NoteDetail title={this.state.notes.title} body={this.state.notes.body} createdAt={this.state.notes.createdAt} />
+                            <NoteDetail {...this.state.note} />
                         </div>
                     </div>
                 </section>
-                <DetailPageAction id={this.props.id} archived={this.state.notes.archived} onArchive={this.onArchiveHandler} onDelete={this.onDeleteHandler} />
+                <DetailPageAction id={this.props.id} archived={this.state.note.archived} onArchive={this.onArchiveHandler} onDelete={this.onDeleteHandler} />
             </div>
         );
     }

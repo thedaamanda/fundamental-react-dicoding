@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
+import { extractContent } from '../utils'
 
 function NoteItemBody({ id, title, body }) {
     return (
@@ -8,7 +9,7 @@ function NoteItemBody({ id, title, body }) {
             <h4 className="title">
                 <Link to={`/notes/${id}`}>{title}</Link>
             </h4>
-            <p className="body">{body}</p>
+            <p className="body">{extractContent(body)}</p>
         </>
     )
 }
