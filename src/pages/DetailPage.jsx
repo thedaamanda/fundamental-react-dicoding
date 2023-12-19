@@ -2,6 +2,8 @@ import React from "react";
 import { getNote, deleteNote, archiveNote, unarchiveNote } from '../utils/local-data';
 import { useParams, useNavigate } from "react-router-dom";
 import NotFound from "./NotFound";
+import DetailPageAction from "../components/DetailPageAction"
+import NoteDetail from "../components/NoteDetail"
 
 function DetailPageWrapper() {
     const { id } = useParams();
@@ -33,7 +35,7 @@ class DetailPage extends React.Component {
     }
 
     onDeleteHandler(id) {
-        deleteNote();
+        deleteNote(id);
 
         this.props.navigate('/');
     }
@@ -44,8 +46,15 @@ class DetailPage extends React.Component {
         }
 
         return (
-            <div className="note">
-                Found
+            <div>
+                <section className="result-section">
+                    <div className="padding-detail">
+                        <div className="result-container">
+                            <NoteDetail title={this.state.notes.title} body={this.state.notes.body} createdAt={this.state.notes.createdAt} />
+                        </div>
+                    </div>
+                </section>
+                <DetailPageAction id={this.props.id} archived={this.state.notes.archived} onArchive={this.onArchiveHandler} onDelete={this.onDeleteHandler} />
             </div>
         );
     }
