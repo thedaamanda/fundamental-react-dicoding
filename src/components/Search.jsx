@@ -6,7 +6,7 @@ class Search extends React.Component {
         super(props);
 
         this.state = {
-            keyword: props.defaultKeyword || '',
+            keyword: props.searchKeyword || '',
         }
 
         this.onSearchChange = this.onSearchChange.bind(this);

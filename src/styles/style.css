@@ -51,7 +51,8 @@ h6 {
     margin: 0px;
 }
 
-input, textarea {
+input,
+textarea {
     font-family: 'CircularStdBook', sans-serif;
     font-weight: normal;
 }
@@ -121,7 +122,9 @@ a {
     justify-content: space-between;
 }
 
-.template-header .header-left, .template-header .header-right, .template-header .header-extra {
+.template-header .header-left,
+.template-header .header-right,
+.template-header .header-extra {
     display: flex;
     align-items: center;
 }
@@ -196,7 +199,7 @@ a {
 
 .preview-image::after {
     position: absolute;
-    content: "";
+    content: '';
     height: 100%;
     width: 100%;
     z-index: -1;
@@ -249,7 +252,8 @@ a {
     text-align: left;
 }
 
-.note-wrapper .field-group input:focus, .note-wrapper .field-group textarea:focus {
+.note-wrapper .field-group input:focus,
+.note-wrapper .field-group textarea:focus {
     border-color: var(--color-primary);
     color: var(--color-heading);
     background-color: transparent;
@@ -404,9 +408,7 @@ a {
 
 .template-btn.secondary-bg:not(:hover) {
     background-color: #f4732a;
-    ;
     border-color: #f4732a;
-    ;
     box-shadow: 0px 10px 30px 0px rgb(244 115 42 / 36%);
 }
 
@@ -442,7 +444,7 @@ a {
 
 .seo-search-box .form-group:after {
     position: absolute;
-    content: "";
+    content: '';
     height: 40px;
     width: 3px;
     background-color: #e5ecfc;
@@ -451,7 +453,8 @@ a {
 
 .seo-search-box.particle .seo-images {
     height: 100%;
-    background-image: url(../images/announcement.png), url(../images/seo-lines.png);
+    background-image: url(../images/announcement.png),
+        url(../images/seo-lines.png);
     background-position: 2% 100%, top right;
     background-size: inherit;
 }
@@ -461,7 +464,8 @@ a {
     height: 80%;
     width: 100%;
     bottom: 0;
-    background-image: url(../images/announcement.png), url(../images/seo-lines.png);
+    background-image: url(../images/announcement.png),
+        url(../images/seo-lines.png);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: 20px 0px, bottom right;
@@ -577,7 +581,7 @@ a {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,.4);
+    background-color: rgba(0, 0, 0, 0.4);
     padding-top: 50px;
     border-radius: 5px;
 }
@@ -650,7 +654,6 @@ a {
     width: 50px;
 }
 
-/* detail page action button with archived and trash css */
 .detailpage_action {
     display: flex;
     position: fixed;
@@ -694,7 +697,7 @@ a {
 }
 
 .font-danger {
-    color: #FC4438 !important;
+    color: #fc4438 !important;
 }
 
 .error-wrapper .error-heading {
@@ -710,7 +713,7 @@ a {
 
 .error-wrapper .sub-content {
     font-size: 18px;
-    color: #2F2F3B;
+    color: #2f2f3b;
     letter-spacing: 1px;
     font-weight: normal;
     line-height: 35px;
@@ -733,7 +736,12 @@ a {
 }
 
 .btn-danger-gradien {
-    background-image: linear-gradient(to right, #fd6a60 0%, #fb1e10 51%, #fd6a60 100%);
+    background-image: linear-gradient(
+        to right,
+        #fd6a60 0%,
+        #fb1e10 51%,
+        #fd6a60 100%
+    );
     border: none;
     color: #fff;
     background-size: auto 200%;
@@ -745,37 +753,28 @@ a {
     padding: 20px 0;
 }
 
-.add-new-page__input {
+.body-wrapper {
     margin-top: 32px;
-  }
+}
 
-  .add-new-page__input .add-new-page__input__title {
+.body-wrapper .input-body {
     width: 100%;
-    background-color: transparent;
+    color: var(--color-body);
     border: 0;
-    color: var(--on-background);
-    font-family: 'Inter', sans-serif;
-    font-size: 64px;
-    font-weight: bold;
-    padding: 8px 0;
-  }
+    background-color: var(--color-soft-grey);
+    font-size: 16px;
+    padding: 10px 28px;
+    min-height: 300px;
+    text-align: left;
+}
 
-  .add-new-page__input__title::placeholder {
-    color: var(--on-background-grey);
-  }
-
-  .add-new-page__input .add-new-page__input__body {
-    width: 100%;
+.body-wrapper .input-body:focus {
+    border: 1px solid var(--color-primary);
     background-color: transparent;
-    border: 0;
-    color: var(--on-background);
-    font-family: 'Inter', sans-serif;
-    font-size: 24px;
-    padding: 8px 0;
-    min-height: 500px;
-  }
+    outline: none;
+}
 
-  [data-placeholder]:empty::before {
+[data-placeholder]:empty::before {
     content: attr(data-placeholder);
-    color: var(--on-background-grey)
-  }
+    color: var(--on-background-grey);
+}
