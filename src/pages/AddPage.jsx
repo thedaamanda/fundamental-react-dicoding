@@ -13,6 +13,7 @@ function AddPage() {
             body,
         });
 
+        toast.success("Catatan berhasil ditambahkan");
         navigate('/');
     }
 

@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link, Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Header from './components/layouts/Header';
 import Footer from './components/layouts/Footer';
+import { ToastContainer } from 'react-toastify';
 
 import HomePage from './pages/HomePage';
 import ArchivedPage from './pages/ArchivedPage';
@@ -23,6 +24,15 @@ function App() {
                 </Routes>
             </main>
             {/* <Footer /> */}
+            <ToastContainer
+                position="top-right"
+                autoClose={1500}
+                hideProgressBar={true}
+                newestOnTop={false}
+                rtl={false}
+                pauseOnFocusLoss
+                pauseOnHover
+                theme="colored" />
         </>
     )
 }

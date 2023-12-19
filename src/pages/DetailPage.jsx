@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import { getNote, deleteNote, archiveNote, unarchiveNote } from '../utils/local-data';
 import { useParams, useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 import NotFound from "./NotFound";
 import DetailPageAction from "../components/DetailPageAction"
 import NoteDetail from "../components/NoteDetail"
@@ -28,8 +29,10 @@ class DetailPage extends React.Component {
     onArchiveHandler(id) {
         if(this.state.notes.archived) {
             unarchiveNote(id);
+            toast.success("Catatan dipulihkan dari arsip");
         } else {
             archiveNote(id);
+            toast.success("Catatan berhasil diarsipkan");
         }
 
         this.props.navigate('/');
@@ -38,6 +41,7 @@ class DetailPage extends React.Component {
     onDeleteHandler(id) {
         deleteNote(id);
 
+        toast.success("Catatan telah dihapus");
         this.props.navigate('/');
     }
 
