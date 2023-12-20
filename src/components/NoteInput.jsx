@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const CHAR_LIMIT = 50;
 
@@ -29,7 +30,7 @@ class NoteInput extends React.Component {
     onBodyChangeHandler(event) {
         this.setState(() => {
             return {
-                body: event.target.value,
+                body: event.target.innerHTML,
             };
         });
     }
@@ -53,8 +54,16 @@ class NoteInput extends React.Component {
                         <div className="title-length">Sisa Karakter: {remainingTitleLength}</div>
                         <input type="text" placeholder="Isi Judul" id="inputNoteTitle" value={this.state.title} onChange={this.onTitleChangeHandler} required />
                     </div>
-                    <div className="field-group">
-                        <textarea placeholder="Tuliskan Catatanmu disini ..." id="inputBodyDescription" rows="5" value={this.state.body} onChange={this.onBodyChangeHandler} required></textarea>
+                    <div className="field-group body-wrapper">
+                        <div
+                            className="input-body"
+                            contentEditable="true"
+                            data-placeholder="Tuliskan catatanmu disini ...."
+                            onInput={this.onBodyChangeHandler}
+                            spellCheck="false"
+                            suppressContentEditableWarning={true}
+                        >
+                        </div>
                     </div>
                     <div className="field-group">
                         <button value="submit" id="btnSubmitForm">Buat Catatan</button>
@@ -63,6 +72,11 @@ class NoteInput extends React.Component {
             </form>
         );
     }
+}
+
+NoteInput.propTypes = {
+    addNote: PropTypes.func.isRequired,
+    note: PropTypes.object,
 }
 
 export default NoteInput;

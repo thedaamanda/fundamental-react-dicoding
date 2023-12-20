@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 
 function NoteContainer({ tagline, noteTitle, children }) {
     return (
@@ -10,6 +11,12 @@ function NoteContainer({ tagline, noteTitle, children }) {
             {children}
         </div>
     )
+}
+
+NoteContainer.propTypes = {
+    tagline: PropTypes.string.isRequired,
+    noteTitle: PropTypes.string.isRequired,
+    children: PropTypes.node.isRequired,
 }
 
 export default NoteContainer
