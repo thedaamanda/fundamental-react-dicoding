@@ -173,7 +173,7 @@ a {
     flex: 42%;
 }
 
-.note-section .flex-item-right .heading {
+.heading {
     margin-bottom: 25px;
 }
 
@@ -281,7 +281,7 @@ a {
     line-height: 1.7;
 }
 
-.note-wrapper .field-group button {
+.field-group button {
     width: 100%;
     height: 55px;
     border: none;
@@ -777,4 +777,13 @@ a {
 [data-placeholder]:empty::before {
     content: attr(data-placeholder);
     color: var(--on-background-grey);
+}
+
+/* Authentication */
+.auth-section {
+    padding-top: 50px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
 }

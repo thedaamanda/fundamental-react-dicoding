@@ -8,6 +8,8 @@ import ArchivedPage from './pages/ArchivedPage';
 import AddPage from './pages/AddPage';
 import DetailPage from './pages/DetailPage';
 import NotFound from './pages/NotFound';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
     return (
@@ -16,6 +18,8 @@ function App() {
             <main>
                 <Routes>
                     <Route path="/" element={<HomePage />} />
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/register" element={<RegisterPage />} />
                     <Route path="/archives" element={<ArchivedPage />} />
                     <Route path="/notes/new" element={<AddPage />} />
                     <Route path="/notes/:id" element={<DetailPage />} />
