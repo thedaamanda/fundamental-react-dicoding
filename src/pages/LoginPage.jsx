@@ -1,22 +1,22 @@
-import React from 'react';
-import { login } from '../utils/network-data';
+import React, { useContext } from 'react'
+import { getUserLogged, login, putAccessToken } from '../utils/network-data';
 import { Link, useNavigate } from 'react-router-dom';
 import LoginInput from '../components/LoginInput'
+import AuthContext from '../contexts/AuthContext'
 
 function LoginPage() {
+    const { setAuth } = useContext(AuthContext)
     const navigate = useNavigate()
 
-    async function loginUser(user) {
+    const loginUser = async (user) => {
         try {
-            const response = await login(user);
-
-            if(!response.error) {
-                alert("Login berhasil");
-                navigate("/");
-                return;
-            }
+            const { data } = await login(user);
+            putAccessToken(data.accessToken);
+            const userLogged = await getUserLogged();
+            setAuth(userLogged.data);
+            navigate('/');
         } catch (error) {
-            alert(error.message);
+            console.log(error);
         }
     }
 

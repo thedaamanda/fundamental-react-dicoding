@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { getUserLogged } from './utils/network-data'
+import { getUserLogged, getAccessToken } from './utils/network-data'
 import Header from './components/layouts/Header';
 import { ToastContainer } from 'react-toastify';
 import Routes from './routes'
@@ -34,7 +34,7 @@ import AuthContext from './contexts/AuthContext'
 // }
 
 function App() {
-    const [authedUser, setAuthedUser] = React.useState(null);
+    const [auth, setAuth] = React.useState(null);
     // const [locale, setLocale] = useState('id')
     // const [theme, changeTheme] = useTheme()
     const [loading, setLoading] = React.useState(true);
@@ -54,10 +54,10 @@ function App() {
     //     toggleLocale
     //   }), [locale])
 
-      const authContextValue = useMemo(() => ({
-        authedUser,
-        setAuthedUser
-      }), [authedUser])
+      const authContextValue = React.useMemo(() => ({
+        auth,
+        setAuth
+      }), [auth])
 
     //   const themeContextValue = useMemo(() => ({
     //     theme,
@@ -65,20 +65,33 @@ function App() {
     //   }), [authedUser])
 
     React.useEffect(() => {
-        getUserLogged()
-            .then((res) => {
-                if(!res.error) {
-                    setAuthedUser(res.data);
-                } else {
-                    setAuthedUser(null);
-                }
+        async function fetchUserLogged() {
+            try {
+                const { data } = await getUserLogged();
+                setAuth(data);
                 setLoading(false);
-            })
-            .catch((err) => {
-                alert(err.message);
+            } catch (error) {
+                console.log(error);
                 setLoading(false);
-            });
-    })
+            }
+        }
+
+        fetchUserLogged();
+
+        // getUserLogged()
+        //     .then((res) => {
+        //         if(!res.error) {
+        //             setAuth(res.data);
+        //         } else {
+        //             setAuth(null);
+        //         }
+        //         setLoading(false);
+        //     })
+        //     .catch((err) => {
+        //         alert(err.message);
+        //         setLoading(false);
+        //     });
+    }, []);
 
     return (
         <AuthContext.Provider value={authContextValue}>

@@ -4,20 +4,20 @@ import { Navigate, useLocation } from 'react-router-dom'
 import AuthContext from '../contexts/AuthContext'
 
 function RouteMiddleware({ children, middleware }) {
-    const { authenticated } = useContext(AuthContext)
+    const { auth } = useContext(AuthContext)
     const location = useLocation()
 
     const middlewares = ['guest', 'auth'];
 
     if (!middlewares.includes(middleware)) {
-        throw new Error(`Invalid middleware prop: ${middleware}. Valid middleware props are: ${middlewares.join(', ')}`)
+        return <Navigate to={{ pathname: '/login', state: { from: location } }} replace />
     }
 
-    if (middleware === 'guest' && authenticated) {
+    if (middleware === 'guest' && auth) {
         return <Navigate to={{ pathname: '/', state: { from: location } }} replace />
     }
 
-    if (middleware === 'auth' && !authenticated) {
+    if (middleware === 'auth' && !auth) {
         return <Navigate to={{ pathname: '/login', state: { from: location } }} replace />
     }
 
@@ -25,8 +25,9 @@ function RouteMiddleware({ children, middleware }) {
 }
 
 RouteMiddleware.propTypes = {
-    children: PropTypes.node.isRequired,
-    middleware: PropTypes.oneOf(['guest', 'auth']).isRequired
+    children: PropTypes.element.isRequired,
+    // middleware: PropTypes.oneOf(['guest', 'auth']).isRequired
+    middleware: PropTypes.string.isRequired
 }
 
 export default RouteMiddleware;
