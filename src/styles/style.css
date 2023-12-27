@@ -144,6 +144,40 @@ a {
     text-decoration: underline;
 }
 
+.template-header .header-right .btn-archive {
+    margin: 0 16px;
+}
+
+.template-header .theme-toggler, .template-header .lang-toggler {
+    align-items: center;
+    background-color: initial;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    margin: 0 16px;
+    font-size: 30px;
+}
+
+.template-header .logout-btn {
+    align-items: center;
+    background-color: initial;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    margin: 0 16px;
+}
+
+.template-header .logout-btn svg {
+    font-size: 30px;
+}
+
+.template-header .logout-btn .logout-btn__text {
+    margin-left: 5px;
+    font-size: 25px
+}
+
 /* Note */
 .note-section {
     padding: 100px 0;

@@ -77,20 +77,6 @@ function App() {
         }
 
         fetchUserLogged();
-
-        // getUserLogged()
-        //     .then((res) => {
-        //         if(!res.error) {
-        //             setAuth(res.data);
-        //         } else {
-        //             setAuth(null);
-        //         }
-        //         setLoading(false);
-        //     })
-        //     .catch((err) => {
-        //         alert(err.message);
-        //         setLoading(false);
-        //     });
     }, []);
 
     return (
