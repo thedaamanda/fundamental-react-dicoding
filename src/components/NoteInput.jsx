@@ -1,82 +1,131 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import useInput from '../hooks/useInput'
 
 const CHAR_LIMIT = 50;
 
-class NoteInput extends React.Component {
-    constructor(props) {
-        super(props);
+// class NoteInput extends React.Component {
+//     constructor(props) {
+//         super(props);
 
-        this.state = {
-            title: '',
-            body: '',
-        }
+//         this.state = {
+//             title: '',
+//             body: '',
+//         }
 
-        this.onTitleChangeHandler = this.onTitleChangeHandler.bind(this);
-        this.onBodyChangeHandler = this.onBodyChangeHandler.bind(this);
-        this.onFormSubmitHandler = this.onFormSubmitHandler.bind(this);
+//         this.onTitleChangeHandler = this.onTitleChangeHandler.bind(this);
+//         this.onBodyChangeHandler = this.onBodyChangeHandler.bind(this);
+//         this.onFormSubmitHandler = this.onFormSubmitHandler.bind(this);
+//     }
+
+//     onTitleChangeHandler(event) {
+//         if (event.target.value.length <= CHAR_LIMIT) {
+//             this.setState(() => {
+//                 return {
+//                     title: event.target.value,
+//                 };
+//             });
+//         }
+//     }
+
+//     onBodyChangeHandler(event) {
+//         this.setState(() => {
+//             return {
+//                 body: event.target.innerHTML,
+//             };
+//         });
+//     }
+
+//     onFormSubmitHandler(event) {
+//         event.preventDefault();
+//         this.props.addNote(this.state);
+//     }
+
+//     render() {
+//         const remainingTitleLength = CHAR_LIMIT - this.state.title.length;
+
+//         return (
+//             <form id="note-form" onSubmit={this.onFormSubmitHandler}>
+//                 <div className="form-groups">
+//                     <div className="heading">
+//                         <span className="tagline">Formulir Catatan</span>
+//                         <h2 className="title">Simpan Catatanmu</h2>
+//                     </div>
+//                     <div className="field-group">
+//                         <div className="title-length">Sisa Karakter: {remainingTitleLength}</div>
+//                         <input type="text" placeholder="Isi Judul" id="inputNoteTitle" value={this.state.title} onChange={this.onTitleChangeHandler} required />
+//                     </div>
+//                     <div className="field-group body-wrapper">
+//                         <div
+//                             className="input-body"
+//                             contentEditable="true"
+//                             data-placeholder="Tuliskan catatanmu disini ...."
+//                             onInput={this.onBodyChangeHandler}
+//                             spellCheck="false"
+//                             suppressContentEditableWarning={true}
+//                         >
+//                         </div>
+//                     </div>
+//                     <div className="field-group">
+//                         <button value="submit" id="btnSubmitForm">Buat Catatan</button>
+//                     </div>
+//                 </div>
+//             </form>
+//         );
+//     }
+// }
+
+function NoteInput({ addNote }) {
+    const [title, setTitle] = useInput('');
+    const [body, setBody] = React.useState('');
+
+    const onBodyChangeHandler = (event) => {
+        setBody(event.target.innerHTML);
     }
 
-    onTitleChangeHandler(event) {
-        if (event.target.value.length <= CHAR_LIMIT) {
-            this.setState(() => {
-                return {
-                    title: event.target.value,
-                };
-            });
-        }
-    }
-
-    onBodyChangeHandler(event) {
-        this.setState(() => {
-            return {
-                body: event.target.innerHTML,
-            };
+    const onFormSubmitHandler = (event) => {
+        event.preventDefault();
+        addNote({
+            title,
+            body,
         });
     }
 
-    onFormSubmitHandler(event) {
-        event.preventDefault();
-        this.props.addNote(this.state);
-    }
+    const remainingTitleLength = CHAR_LIMIT - title.length;
 
-    render() {
-        const remainingTitleLength = CHAR_LIMIT - this.state.title.length;
-
-        return (
-            <form id="note-form" onSubmit={this.onFormSubmitHandler}>
-                <div className="form-groups">
-                    <div className="heading">
-                        <span className="tagline">Formulir Catatan</span>
-                        <h2 className="title">Simpan Catatanmu</h2>
-                    </div>
-                    <div className="field-group">
-                        <div className="title-length">Sisa Karakter: {remainingTitleLength}</div>
-                        <input type="text" placeholder="Isi Judul" id="inputNoteTitle" value={this.state.title} onChange={this.onTitleChangeHandler} required />
-                    </div>
-                    <div className="field-group body-wrapper">
-                        <div
-                            className="input-body"
-                            contentEditable="true"
-                            data-placeholder="Tuliskan catatanmu disini ...."
-                            onInput={this.onBodyChangeHandler}
-                            spellCheck="false"
-                            suppressContentEditableWarning={true}
-                        >
-                        </div>
-                    </div>
-                    <div className="field-group">
-                        <button value="submit" id="btnSubmitForm">Buat Catatan</button>
+    return (
+        <form id="note-form" onSubmit={onFormSubmitHandler}>
+            <div className="form-groups">
+                <div className="heading">
+                    <span className="tagline">Formulir Catatan</span>
+                    <h2 className="title">Simpan Catatanmu</h2>
+                </div>
+                <div className="field-group">
+                    <div className="title-length">Sisa Karakter: {remainingTitleLength}</div>
+                    <input type="text" placeholder="Isi Judul" id="inputNoteTitle" value={title} onChange={setTitle} required />
+                </div>
+                <div className="field-group body-wrapper">
+                    <div
+                        className="input-body"
+                        contentEditable="true"
+                        data-placeholder="Tuliskan catatanmu disini ...."
+                        onInput={onBodyChangeHandler}
+                        spellCheck="false"
+                        suppressContentEditableWarning={true}
+                    >
                     </div>
                 </div>
-            </form>
-        );
-    }
+                <div className="field-group">
+                    <button value="submit" id="btnSubmitForm">Buat Catatan</button>
+                </div>
+            </div>
+        </form>
+    );
 }
 
 NoteInput.propTypes = {
     addNote: PropTypes.func.isRequired,
     note: PropTypes.object,
-}
+};
 
 export default NoteInput;

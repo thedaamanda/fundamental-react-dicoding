@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
-import { addNote } from '../utils/local-data';
+import { addNote } from '../utils/network-data';
 import NoteInput from '../components/NoteInput';
 import ImageHeader from '../components/ImageHeader';
 import { toast } from 'react-toastify';
@@ -8,14 +8,17 @@ import { toast } from 'react-toastify';
 function AddPage() {
     const navigate = useNavigate();
 
-    function onAddNoteHandler({ title, body }) {
-        addNote({
-            title,
-            body,
-        });
-
-        toast.success("Catatan berhasil ditambahkan");
-        navigate('/');
+    const onAddNoteHandler = async (note) => {
+        try {
+            await addNote({
+                title: note.title,
+                body: note.body
+            });
+            toast.success("Catatan berhasil ditambahkan");
+            navigate('/');
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
