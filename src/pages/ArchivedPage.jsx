@@ -1,68 +1,109 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getArchivedNotes } from '../utils/local-data';
+import { getArchivedNotes } from '../utils/network-data';
 import Search from '../components/Search';
 import NoteList from '../components/NoteList';
 import NoteContainer from '../components/NoteContainer';
 import { useSearchParams } from 'react-router-dom';
 
-function ArchivedPageWrapper() {
+// function ArchivedPageWrapper() {
+//     const [searchParams, setSearchParams] = useSearchParams();
+//     const keyword = searchParams.get('keyword');
+//     function changeSearchParams(keyword) {
+//       setSearchParams({ keyword });
+//     }
+
+//     return <ArchivedPage defaultKeyword={keyword} keywordChange={changeSearchParams} />
+// }
+
+// class ArchivedPage extends React.Component {
+//     constructor(props) {
+//         super(props);
+
+//         this.state = {
+//             notes: getArchivedNotes(),
+//             searchKeyword: props.defaultKeyword || '',
+//         }
+
+//         this.onSearchHandler = this.onSearchHandler.bind(this);
+//     }
+
+//     onSearchHandler(keyword) {
+//         this.setState(() => {
+//             return {
+//                 searchKeyword: keyword,
+//             };
+//         });
+
+//         this.props.keywordChange(keyword);
+//     }
+
+//     render() {
+//         const notes = this.state.notes.filter(note => note.title.toLowerCase().includes(this.state.searchKeyword.toLowerCase()));
+
+//         return (
+//             <div>
+//                 <section className="result-section">
+//                     <Search searchKeyword={this.state.searchKeyword} onSearch={this.onSearchHandler} />
+//                     <div className="padding-tb">
+//                         <div className="result-container">
+//                             <div className="row-center-padding" id="list-archived-note">
+//                                 <NoteContainer tagline="Daftar Catatan" noteTitle="Catatan Arsip">
+//                                     <NoteList noteList={notes} />
+//                                 </NoteContainer>
+//                             </div>
+//                         </div>
+//                     </div>
+//                 </section>
+//             </div>
+//         );
+//     }
+// }
+
+function ArchivedPage() {
     const [searchParams, setSearchParams] = useSearchParams();
-    const keyword = searchParams.get('keyword');
-    function changeSearchParams(keyword) {
-      setSearchParams({ keyword });
-    }
+    const [notes, setNotes] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
 
-    return <ArchivedPage defaultKeyword={keyword} keywordChange={changeSearchParams} />
-}
+    const [searchKeyword, setSearchKeyword] = React.useState(() => {
+        return searchParams.get('keyword') || '';
+    });
 
-class ArchivedPage extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            notes: getArchivedNotes(),
-            searchKeyword: props.defaultKeyword || '',
-        }
-
-        this.onSearchHandler = this.onSearchHandler.bind(this);
-    }
-
-    onSearchHandler(keyword) {
-        this.setState(() => {
-            return {
-                searchKeyword: keyword,
-            };
+    React.useEffect(() => {
+        getArchivedNotes().then(({ data }) => {
+            setNotes(data);
+            setLoading(false);
         });
+    }, []);
 
-        this.props.keywordChange(keyword);
+    function changeSearchParams(keyword) {
+        setSearchKeyword(keyword);
+        setSearchParams({ keyword });
     }
 
-    render() {
-        const notes = this.state.notes.filter(note => note.title.toLowerCase().includes(this.state.searchKeyword.toLowerCase()));
+    const filteredNotes = notes.filter(note => note.title.toLowerCase().includes(searchKeyword.toLowerCase()));
 
-        return (
-            <div>
-                <section className="result-section">
-                    <Search searchKeyword={this.state.searchKeyword} onSearch={this.onSearchHandler} />
-                    <div className="padding-tb">
-                        <div className="result-container">
-                            <div className="row-center-padding" id="list-archived-note">
-                                <NoteContainer tagline="Daftar Catatan" noteTitle="Catatan Arsip">
-                                    <NoteList noteList={notes} />
-                                </NoteContainer>
-                            </div>
+    return (
+        <div>
+            <section className="result-section">
+                <Search searchKeyword={searchKeyword} onSearch={changeSearchParams} />
+                <div className="padding-tb">
+                    <div className="result-container">
+                        <div className="row-center-padding" id="list-archived-note">
+                            <NoteContainer tagline="Daftar Catatan" noteTitle="Catatan Arsip">
+                                <NoteList noteList={filteredNotes} />
+                            </NoteContainer>
                         </div>
                     </div>
-                </section>
-            </div>
-        );
-    }
+                </div>
+            </section>
+        </div>
+    );
 }
 
 ArchivedPage.propTypes = {
-    keywordChange: PropTypes.func.isRequired,
-    defaultKeyword: PropTypes.string
-}
+    searchKeyword: PropTypes.string,
+    onSearch: PropTypes.func,
+};
 
-export default ArchivedPageWrapper;
+export default ArchivedPage;
