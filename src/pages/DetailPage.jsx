@@ -6,69 +6,7 @@ import { toast } from 'react-toastify';
 import NotFound from "./NotFound";
 import DetailPageAction from "../components/DetailPageAction"
 import NoteDetail from "../components/NoteDetail"
-
-// function DetailPageWrapper() {
-//     const { id } = useParams();
-//     const navigate = useNavigate();
-
-//     return <DetailPage id={id} navigate={navigate}/>;
-// }
-
-// class DetailPage extends React.Component {
-//     constructor(props) {
-//         super(props);
-
-//         this.state = {
-//             note: getNote(props.id)
-//         };
-
-//         this.onArchiveHandler = this.onArchiveHandler.bind(this);
-//         this.onDeleteHandler = this.onDeleteHandler.bind(this);
-//     }
-
-//     onArchiveHandler(id) {
-//         if(this.state.note.archived) {
-//             unarchiveNote(id);
-//             toast.success("Catatan dipulihkan dari arsip");
-//         } else {
-//             archiveNote(id);
-//             toast.success("Catatan berhasil diarsipkan");
-//         }
-
-//         this.props.navigate('/');
-//     }
-
-//     onDeleteHandler(id) {
-//         deleteNote(id);
-
-//         toast.success("Catatan telah dihapus");
-//         this.props.navigate('/');
-//     }
-
-//     render() {
-//         if (!this.state.note) {
-//             return <NotFound />;
-//         }
-
-//         return (
-//             <div>
-//                 <section className="result-section">
-//                     <div className="padding-detail">
-//                         <div className="result-container">
-//                             <NoteDetail {...this.state.note} />
-//                         </div>
-//                     </div>
-//                 </section>
-//                 <DetailPageAction id={this.props.id} archived={this.state.note.archived} onArchive={this.onArchiveHandler} onDelete={this.onDeleteHandler} />
-//             </div>
-//         );
-//     }
-// }
-
-// DetailPage.propTypes = {
-//     id: PropTypes.string.isRequired,
-//     navigate: PropTypes.func.isRequired,
-// }
+import Skeleton from 'react-loading-skeleton'
 
 function DetailPage() {
     const { id } = useParams();
@@ -78,31 +16,30 @@ function DetailPage() {
     const [loading, setLoading] = React.useState(true);
 
     React.useEffect(() => {
-        async function fetchNote() {
-            try {
-                const { data } = await getNote(id);
-                setNote(data);
-                setLoading(false);
-            } catch (error) {
-                setLoading(false);
-            }
-        }
-
-        fetchNote();
+        getNote(id).then(({ data }) => {
+            setNote(data);
+            setLoading(false);
+        }).catch(() => {
+            alert("Terjadi kesalahan saat mengambil data");
+            setLoading(false);
+        });
     }, []);
 
     const onArchiveHandler = async (id) => {
+        let navigateTo = '/';
+
         if(note.archived) {
             await unarchiveNote(id);
 
             toast.success("Catatan dipulihkan dari arsip");
+            navigateTo = '/archives';
         } else {
             await archiveNote(id);
 
             toast.success("Catatan berhasil diarsipkan");
         }
 
-        navigate('/');
+        navigate(navigateTo);
     }
 
     const onDeleteHandler = async (id) => {
@@ -110,10 +47,6 @@ function DetailPage() {
 
         toast.success("Catatan telah dihapus");
         navigate('/');
-    }
-
-    if (loading) {
-        return <div>Loading...</div>;
     }
 
     if (!note) {
@@ -129,14 +62,16 @@ function DetailPage() {
                     </div>
                 </div>
             </section>
-            <DetailPageAction id={id} archived={note.archived} onArchive={onArchiveHandler} onDelete={onDeleteHandler} />
+            <DetailPageAction id={id} archived={note.archived || false} onArchive={onArchiveHandler} onDelete={onDeleteHandler} />
         </div>
     );
 }
 
-// DetailPage.propTypes = {
-//     id: PropTypes.string,
-//     navigate: PropTypes.func,
-// }
+DetailPage.propTypes = {
+    id: PropTypes.string,
+    archived: PropTypes.bool,
+    onArchive: PropTypes.func,
+    onDelete: PropTypes.func,
+};
 
 export default DetailPage;

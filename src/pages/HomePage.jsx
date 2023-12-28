@@ -6,6 +6,8 @@ import NoteList from '../components/NoteList';
 import NoteContainer from '../components/NoteContainer';
 import HomePageAction from '../components/HomePageAction';
 import { useSearchParams } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton'
+import SkeletonLoading from '../components/SkeletonLoading'
 
 function HomePage() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -38,7 +40,7 @@ function HomePage() {
                     <div className="result-container">
                         <div className="row-center-padding" id="list-active-note">
                             <NoteContainer tagline="Daftar Catatan" noteTitle="Catatan Aktif">
-                                <NoteList noteList={filteredNotes} />
+                                {!loading ? <NoteList noteList={filteredNotes} /> : <SkeletonLoading total={5} /> }
                             </NoteContainer>
                         </div>
                     </div>
