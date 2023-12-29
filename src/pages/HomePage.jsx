@@ -6,7 +6,6 @@ import NoteList from '../components/NoteList';
 import NoteContainer from '../components/NoteContainer';
 import HomePageAction from '../components/HomePageAction';
 import { useSearchParams } from 'react-router-dom';
-import Skeleton from 'react-loading-skeleton'
 import SkeletonLoading from '../components/SkeletonLoading'
 
 function HomePage() {

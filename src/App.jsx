@@ -1,21 +1,17 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { getUserLogged, getAccessToken } from './utils/network-data'
+import React from 'react'
+import { getUserLogged } from './utils/network-data'
 import Header from './components/layouts/Header';
 import { ToastContainer } from 'react-toastify';
 import Routes from './routes'
 import AuthContext from './contexts/AuthContext'
-
+import ThemeContext from './contexts/ThemeContext'
+import useTheme from './hooks/useTheme'
 
 function App() {
+    const [theme, changeTheme] = useTheme();
     const [auth, setAuth] = React.useState(null);
     // const [locale, setLocale] = useState('id')
-    // const [theme, changeTheme] = useTheme()
     const [loading, setLoading] = React.useState(true);
-
-    // const [authedUser, setAuthedUser] = React.useState(null);
-    // const [initializing, setInitializing] = React.useState(true);
-    // const [locale, setLocale] = React.useState(localStorage.getItem('locale') || 'id');
-    // const [theme, setTheme] = React.useState(localStorage.getItem('theme') || 'dark');
 
     // const toggleLocale = () => {
     //     localStorage.setItem('locale', (locale === 'id' ? 'en' : 'id'))
@@ -27,15 +23,15 @@ function App() {
     //     toggleLocale
     //   }), [locale])
 
-      const authContextValue = React.useMemo(() => ({
+    const themeContextValue = React.useMemo(() => ({
+        theme,
+        changeTheme
+    }), [theme])
+
+    const authContextValue = React.useMemo(() => ({
         auth,
         setAuth
-      }), [auth])
-
-    //   const themeContextValue = useMemo(() => ({
-    //     theme,
-    //     changeTheme
-    //   }), [authedUser])
+    }), [auth]);
 
     React.useEffect(() => {
         getUserLogged().then(({ data }) => {
@@ -45,21 +41,23 @@ function App() {
     }, []);
 
     return (
-        <AuthContext.Provider value={authContextValue}>
-            <Header />
-            <main>
-                <Routes />
-            </main>
-            <ToastContainer
-                position="top-right"
-                autoClose={1500}
-                hideProgressBar={true}
-                newestOnTop={false}
-                rtl={false}
-                pauseOnFocusLoss
-                pauseOnHover
-                theme="colored" />
-        </AuthContext.Provider>
+        <ThemeContext.Provider value={themeContextValue}>
+            <AuthContext.Provider value={authContextValue}>
+                <Header />
+                <main>
+                    <Routes />
+                </main>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={1500}
+                    hideProgressBar={true}
+                    newestOnTop={false}
+                    rtl={false}
+                    pauseOnFocusLoss
+                    pauseOnHover
+                    theme="colored" />
+            </AuthContext.Provider>
+        </ThemeContext.Provider>
     )
 }
 

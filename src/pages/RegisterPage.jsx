@@ -6,17 +6,16 @@ import { Link, useNavigate } from 'react-router-dom';
 function RegisterPage() {
     const navigate = useNavigate()
 
-    async function registerUser(user) {
+    const registerUser = async (user) => {
         try {
             const response = await register(user);
 
             if(!response.error) {
-                alert("Registrasi berhasil");
+                alert("User successfully registered");
                 navigate("/login");
-                return;
             }
         } catch (error) {
-            alert(error.message);
+            console.log(error);
         }
     }
 

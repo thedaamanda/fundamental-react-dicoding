@@ -28,10 +28,6 @@
         margin-bottom: 10px;
     }
 
-    .modal-content {
-        width: 80%;
-    }
-
     .error-wrapper {
         padding: 100px;
     }
@@ -68,9 +64,5 @@
 
     .seo-search-box form {
         display: block;
-    }
-
-    .seo-search-box form button.template-btn {
-        width: 100%;
     }
 }
