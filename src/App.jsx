@@ -5,33 +5,6 @@ import { ToastContainer } from 'react-toastify';
 import Routes from './routes'
 import AuthContext from './contexts/AuthContext'
 
-// function App() {
-//     return (
-//         <>
-//             <Header />
-//             <main>
-//                 <Routes>
-//                     <Route path="/" element={<HomePage />} />
-//                     <Route path="/login" element={<LoginPage />} />
-//                     <Route path="/register" element={<RegisterPage />} />
-//                     <Route path="/archives" element={<ArchivedPage />} />
-//                     <Route path="/notes/new" element={<AddPage />} />
-//                     <Route path="/notes/:id" element={<DetailPage />} />
-//                     <Route path="*" element={<NotFound/>} />
-//                 </Routes>
-//             </main>
-//             <ToastContainer
-//                 position="top-right"
-//                 autoClose={1500}
-//                 hideProgressBar={true}
-//                 newestOnTop={false}
-//                 rtl={false}
-//                 pauseOnFocusLoss
-//                 pauseOnHover
-//                 theme="colored" />
-//         </>
-//     )
-// }
 
 function App() {
     const [auth, setAuth] = React.useState(null);
@@ -65,17 +38,10 @@ function App() {
     //   }), [authedUser])
 
     React.useEffect(() => {
-        async function fetchUserLogged() {
-            try {
-                const { data } = await getUserLogged();
-                setAuth(data);
-                setLoading(false);
-            } catch (error) {
-                setLoading(false);
-            }
-        }
-
-        fetchUserLogged();
+        getUserLogged().then(({ data }) => {
+            setAuth(data);
+            setLoading(false);
+        });
     }, []);
 
     return (

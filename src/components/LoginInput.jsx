@@ -21,7 +21,7 @@ function LoginInput({ login }) {
                 </div>
                 <div className="form-group">
                     <label htmlFor="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Masukkan Password" value={password} onChange={onPasswordChange} />
+                    <input type="password" id="password" name="password" placeholder="Masukkan Password" value={password} onChange={onPasswordChange} autoComplete="on" />
                 </div>
                 <div className="form-group field-group">
                     <button type="submit" id="btnLoginForm">Masuk</button>

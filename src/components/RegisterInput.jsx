@@ -32,11 +32,11 @@ function RegisterInput({ register }) {
                 </div>
                 <div className="form-group">
                     <label htmlFor="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Masukkan Password" value={password} onChange={onPasswordChange} />
+                    <input type="password" id="password" name="password" placeholder="Masukkan Password" value={password} onChange={onPasswordChange} autoComplete="on" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="password_confirmation">Konfirmasi Password</label>
-                    <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Masukkan Konfirmasi Password" value={confirmPassword} onChange={onConfirmPasswordChange} />
+                    <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Masukkan Konfirmasi Password" value={confirmPassword} onChange={onConfirmPasswordChange} autoComplete="on" />
                 </div>
                 <div className="form-group field-group">
                     <button type="submit" id="btnRegisterForm">Daftar</button>
