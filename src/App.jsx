@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
 import { getUserLogged } from './utils/network-data'
 import Header from './components/layouts/Header';
 import { ToastContainer } from 'react-toastify';
-import Routes from './routes'
-import ThemeContext from './contexts/ThemeContext'
-import LocaleContext from './contexts/LocaleContext'
-import AuthContext from './contexts/AuthContext'
-import useTheme from './hooks/useTheme'
-import useLocale from './hooks/useLocale'
+import Routes from './routes';
+import ThemeContext from './contexts/ThemeContext';
+import LocaleContext from './contexts/LocaleContext';
+import AuthContext from './contexts/AuthContext';
+import useTheme from './hooks/useTheme';
+import useLocale from './hooks/useLocale';
 
 function App() {
     const [theme, changeTheme] = useTheme();
@@ -18,12 +18,12 @@ function App() {
     const localeContextValue = React.useMemo(() => ({
         locale,
         changeLocale
-    }), [locale])
+    }), [locale]);
 
     const themeContextValue = React.useMemo(() => ({
         theme,
         changeTheme
-    }), [theme])
+    }), [theme]);
 
     const authContextValue = React.useMemo(() => ({
         auth,

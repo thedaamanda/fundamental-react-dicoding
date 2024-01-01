@@ -3,15 +3,15 @@ import React, { useState } from 'react';
 function useLocale() {
     const [locale, setLocale] = useState('id');
 
-    const changeLocale = (val) => {
-        localStorage.setItem('locale', val);
-        setLocale(val);
+    const changeLocale = () => {
+        localStorage.setItem('locale', (locale === 'id' ? 'en' : 'id'));
+        setLocale((prevLocale) => (prevLocale === 'id' ? 'en' : 'id'));
     };
 
     React.useEffect(() => {
         const localLocale = localStorage.getItem('locale');
-        localLocale && changeLocale(localLocale);
-    }, [locale]);
+        localLocale && setLocale(localLocale);
+    });
 
     return [locale, changeLocale];
 }
