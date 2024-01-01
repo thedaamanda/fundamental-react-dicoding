@@ -3,10 +3,12 @@ import { getUserLogged, login, putAccessToken } from '../utils/network-data';
 import { Link, useNavigate } from 'react-router-dom';
 import LoginInput from '../components/LoginInput'
 import AuthContext from '../contexts/AuthContext'
+import useLanguage from '../hooks/useLanguage'
 
 function LoginPage() {
     const { setAuth } = useContext(AuthContext)
     const navigate = useNavigate()
+    const textLogin = useLanguage('login')
 
     const loginUser = async (user) => {
         try {
@@ -25,7 +27,7 @@ function LoginPage() {
             <div className="result-container">
                 <div className="form-box">
                     <div className="heading">
-                        <span className="tagline">Yuk, login untuk menggunakan aplikasi.</span>
+                        <span className="tagline">{textLogin.header}</span>
                         <h2 className="title">Masuk</h2>
                     </div>
                     <LoginInput login={loginUser} />

@@ -6,7 +6,12 @@ function ThemeToggler() {
     const [theme, changeTheme] = useTheme();
 
     return (
-        <button type='button' className='theme-toggler' onClick={() => changeTheme(theme === 'light' ? 'dark' : 'light')}>
+        <button
+            type='button'
+            title={theme === 'light' ? 'Dark Theme' : 'Light Theme'}
+            className='theme-toggler'
+            onClick={() => changeTheme(theme === 'light' ? 'dark' : 'light')}
+        >
             {theme === 'light' ? <FiMoon /> : <FiSun />}
         </button>
     );
