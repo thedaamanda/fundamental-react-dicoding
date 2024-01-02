@@ -6,11 +6,13 @@ import NoteList from '../components/NoteList';
 import NoteContainer from '../components/NoteContainer';
 import { useSearchParams } from 'react-router-dom';
 import SkeletonLoading from '../components/SkeletonLoading'
+import useLanguage from '../hooks/useLanguage'
 
 function ArchivedPage() {
     const [searchParams, setSearchParams] = useSearchParams();
     const [notes, setNotes] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
+    const textArchived = useLanguage('archived')
 
     const [searchKeyword, setSearchKeyword] = React.useState(() => {
         return searchParams.get('keyword') || '';
@@ -37,7 +39,7 @@ function ArchivedPage() {
                 <div className="padding-tb">
                     <div className="result-container">
                         <div className="row-center-padding" id="list-archived-note">
-                            <NoteContainer tagline="Daftar Catatan" noteTitle="Catatan Arsip">
+                            <NoteContainer tagline={textArchived.tagline} noteTitle={textArchived.title}>
                                 {!loading ? <NoteList noteList={filteredNotes} /> : <SkeletonLoading total={5} /> }
                             </NoteContainer>
                         </div>

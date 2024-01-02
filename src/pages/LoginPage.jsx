@@ -28,11 +28,11 @@ function LoginPage() {
                 <div className="form-box">
                     <div className="heading">
                         <span className="tagline">{textLogin.header}</span>
-                        <h2 className="title">Masuk</h2>
+                        <h2 className="title">{textLogin.title}</h2>
                     </div>
                     <LoginInput login={loginUser} />
                     <div className="form-box-footer">
-                        <p>Belum punya akun? <Link to="/register">Daftar</Link></p>
+                        <p>{textLogin.footer} <Link to="/register">{textLogin.footerLink}</Link></p>
                     </div>
                 </div>
             </div>

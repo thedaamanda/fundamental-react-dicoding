@@ -6,8 +6,6 @@ import LocaleContext from '../../contexts/LocaleContext'
 function LangToggler() {
     const { locale, changeLocale } = useContext(LocaleContext);
 
-    console.log(locale);
-
     return (
         <button
             type='button'

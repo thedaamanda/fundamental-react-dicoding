@@ -7,11 +7,13 @@ import NoteContainer from '../components/NoteContainer';
 import HomePageAction from '../components/HomePageAction';
 import { useSearchParams } from 'react-router-dom';
 import SkeletonLoading from '../components/SkeletonLoading'
+import useLanguage from '../hooks/useLanguage'
 
 function HomePage() {
     const [searchParams, setSearchParams] = useSearchParams();
     const [notes, setNotes] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
+    const textHome = useLanguage('home')
 
     const [searchKeyword, setSearchKeyword] = React.useState(() => {
         return searchParams.get('keyword') || '';
@@ -38,7 +40,7 @@ function HomePage() {
                 <div className="padding-tb">
                     <div className="result-container">
                         <div className="row-center-padding" id="list-active-note">
-                            <NoteContainer tagline="Daftar Catatan" noteTitle="Catatan Aktif">
+                            <NoteContainer tagline={textHome.tagline} noteTitle={textHome.title}>
                                 {!loading ? <NoteList noteList={filteredNotes} /> : <SkeletonLoading total={5} /> }
                             </NoteContainer>
                         </div>

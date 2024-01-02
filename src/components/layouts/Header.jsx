@@ -4,10 +4,11 @@ import AuthContext from '../../contexts/AuthContext'
 import ThemeToggler from './ThemeToggler'
 import LogoutButton from './LogoutButton'
 import LangToggler from './LangToggler'
+import useLanguage from '../../hooks/useLanguage'
 
 function Header() {
     const { auth } = useContext(AuthContext);
-    const { pathname } = useLocation();
+    const textApp = useLanguage('app');
 
     return (
         <header className='template-header'>
@@ -16,7 +17,7 @@ function Header() {
                     <div className='header-left'>
                         <div className='brand-logo'>
                             <Link to='/'>
-                                <h1>Note App</h1>
+                                <h1>{textApp.appName}</h1>
                             </Link>
                         </div>
                     </div>
@@ -24,7 +25,7 @@ function Header() {
                         { auth ? (
                                 <>
                                     <Link to='/archives' className="btn-archive">
-                                        <h2>Archived Note</h2>
+                                        <h2>{textApp.header.archives}</h2>
                                     </Link>
                                 </>
                             ) : ''

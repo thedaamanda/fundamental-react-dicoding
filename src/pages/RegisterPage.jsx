@@ -2,9 +2,11 @@ import React from 'react';
 import RegisterInput from '../components/RegisterInput'
 import { register } from '../utils/network-data';
 import { Link, useNavigate } from 'react-router-dom';
+import useLanguage from '../hooks/useLanguage'
 
 function RegisterPage() {
     const navigate = useNavigate()
+    const textRegister = useLanguage('register')
 
     const registerUser = async (user) => {
         try {
@@ -24,12 +26,12 @@ function RegisterPage() {
             <div className="result-container">
                 <div className="form-box">
                     <div className="heading">
-                        <span className="tagline">Isi form untuk mendaftar akun.</span>
-                        <h2 className="title">Daftar Akun</h2>
+                        <span className="tagline">{textRegister.header}</span>
+                        <h2 className="title">{textRegister.title}</h2>
                     </div>
                     <RegisterInput register={registerUser} />
                     <div className="form-box-footer">
-                        <p>Sudah punya akun? <Link to="/login">Login</Link></p>
+                        <p>{textRegister.footer} <Link to="/login">{textRegister.footerLink}</Link></p>
                     </div>
                 </div>
             </div>

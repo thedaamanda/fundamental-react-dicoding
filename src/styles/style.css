@@ -22,6 +22,7 @@
     --color-dark: #1b202f;
     --color-search: #473bf0;
     --color-input: #f2f5fe;
+    --color-text-input: #6e727d;
 }
 
 [data-theme="dark"] {
@@ -38,6 +39,7 @@
     --color-dark: #3b5de7;
     --color-search: #473bf0;
     --color-input: #222f40;
+    --color-text-input: #f2f5fe;
 }
 
 * {
@@ -83,7 +85,7 @@ input {
     padding: 0 30px;
     background-color: var(--color-input);
     border: none;
-    color: var(--color-soft-grey);
+    color: var(--color-text-input);
     border-radius: 0;
     font-size: 16px;
 }
@@ -93,7 +95,7 @@ textarea {
     padding: 20px 30px;
     background-color: var(--color-soft-grey);
     border: none;
-    color: var(--color-body);
+    color: var(--color-text-input);
     border-radius: 0;
     font-size: 16px;
     resize: none;
