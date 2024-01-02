@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { addNote } from '../utils/network-data';
 import NoteInput from '../components/NoteInput';

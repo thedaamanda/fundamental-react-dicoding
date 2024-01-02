@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import AuthContext from '../../contexts/AuthContext'
 import ThemeToggler from './ThemeToggler'
 import LogoutButton from './LogoutButton'
