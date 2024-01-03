@@ -40,6 +40,14 @@ const appPage = {
                     unarchive: 'Catatan dipulihkan dari arsip.',
                 },
             },
+            alert: {
+                success: {
+                    register: 'Pendaftaran akun berhasil. Silahkan login untuk menggunakan aplikasi.',
+                },
+                error: {
+                    passwordNotMatch: 'Password dan konfirmasi password tidak sesuai.',
+                }
+            }
         },
         login: 'Masuk',
         register: 'Daftar',
@@ -85,6 +93,14 @@ const appPage = {
                     unarchive: 'Note restored from archive.',
                 },
             },
+            alert: {
+                success: {
+                    register: 'Account registration successful. Please login to use the application.',
+                },
+                error: {
+                    passwordNotMatch: 'Password and confirmation password do not match.',
+                }
+            }
         },
         login: 'Login',
         register: 'Register',

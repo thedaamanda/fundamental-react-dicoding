@@ -15,7 +15,7 @@ function RegisterInput({ register }) {
         event.preventDefault();
 
         if (password !== confirmPassword) {
-            alert('Password dan konfirmasi password tidak sama');
+            alert(text.message.alert.error.passwordNotMatch);
             return;
         }
 
