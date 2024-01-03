@@ -1,10 +1,10 @@
-import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
-import AuthContext from '../../contexts/AuthContext'
-import ThemeToggler from './ThemeToggler'
-import LogoutButton from './LogoutButton'
-import LangToggler from './LangToggler'
-import useLanguage from '../../hooks/useLanguage'
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import AuthContext from '../../contexts/AuthContext';
+import ThemeToggler from './ThemeToggler';
+import LogoutButton from './LogoutButton';
+import LangToggler from './LangToggler';
+import useLanguage from '../../hooks/useLanguage';
 
 function Header() {
     const { auth } = useContext(AuthContext);
@@ -22,14 +22,15 @@ function Header() {
                         </div>
                     </div>
                     <div className='header-right'>
-                        { auth ? (
-                                <>
-                                    <Link to='/archives' className="btn-archive">
-                                        <h2>{textApp.header.archives}</h2>
-                                    </Link>
-                                </>
-                            ) : ''
-                        }
+                        {auth ? (
+                            <>
+                                <Link to='/archives' className='btn-archive'>
+                                    <h2>{textApp.header.archives}</h2>
+                                </Link>
+                            </>
+                        ) : (
+                            ''
+                        )}
                         <LangToggler />
                         <ThemeToggler />
                         <LogoutButton />

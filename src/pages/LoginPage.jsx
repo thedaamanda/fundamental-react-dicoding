@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import PropTypes from 'prop-types';
 import { getUserLogged, login, putAccessToken } from '../utils/network-data';
 import { Link, useNavigate } from 'react-router-dom';
 import LoginInput from '../components/LoginInput'
@@ -38,6 +39,10 @@ function LoginPage() {
             </div>
         </div>
     );
+}
+
+LoginPage.propTypes = {
+    login: PropTypes.func
 }
 
 export default LoginPage;

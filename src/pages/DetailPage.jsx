@@ -6,11 +6,13 @@ import { toast } from 'react-toastify';
 import NotFound from "./NotFound";
 import DetailPageAction from "../components/DetailPageAction"
 import NoteDetail from "../components/NoteDetail"
-import Skeleton from 'react-loading-skeleton'
+import useLanguage from "../hooks/useLanguage"
 
 function DetailPage() {
     const { id } = useParams();
     const navigate = useNavigate();
+
+    const textToast = useLanguage('app');
 
     const [note, setNote] = React.useState({});
     const [loading, setLoading] = React.useState(true);
@@ -31,12 +33,12 @@ function DetailPage() {
         if(note.archived) {
             await unarchiveNote(id);
 
-            toast.success("Catatan dipulihkan dari arsip");
+            toast.success(textToast.message.toasts.success.unarchive);
             navigateTo = '/archives';
         } else {
             await archiveNote(id);
 
-            toast.success("Catatan berhasil diarsipkan");
+            toast.success(textToast.message.toasts.success.archive);
         }
 
         navigate(navigateTo);
@@ -45,7 +47,7 @@ function DetailPage() {
     const onDeleteHandler = async (id) => {
         await deleteNote(id);
 
-        toast.success("Catatan telah dihapus");
+        toast.success(textToast.message.toasts.success.delete);
         navigate('/');
     }
 

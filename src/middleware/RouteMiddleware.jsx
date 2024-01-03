@@ -25,7 +25,7 @@ function RouteMiddleware({ children, middleware }) {
 }
 
 RouteMiddleware.propTypes = {
-    children: PropTypes.node.isRequired,
+    children: PropTypes.element.isRequired,
     middleware: PropTypes.oneOf(['guest', 'auth']).isRequired
 }
 

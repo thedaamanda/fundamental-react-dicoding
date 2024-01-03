@@ -35,8 +35,8 @@ const Routes = () => useRoutes([
         element: <RouteMiddleware middleware="guest"><RegisterPage /></RouteMiddleware>
     },
     {
-        path: '*',
-        element: <NotFound />
+        path: '/*',
+        element: <RouteMiddleware middleware="auth"><NotFound /></RouteMiddleware>
     }
 ])
 

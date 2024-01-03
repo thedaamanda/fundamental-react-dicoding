@@ -5,9 +5,11 @@ import { addNote } from '../utils/network-data';
 import NoteInput from '../components/NoteInput';
 import ImageHeader from '../components/ImageHeader';
 import { toast } from 'react-toastify';
+import useLanguage from '../hooks/useLanguage';
 
 function AddPage() {
     const navigate = useNavigate();
+    const textToast = useLanguage('app');
 
     const onAddNoteHandler = async (note) => {
         try {
@@ -15,7 +17,7 @@ function AddPage() {
                 title: note.title,
                 body: note.body
             });
-            toast.success("Catatan berhasil ditambahkan");
+            toast.success(textToast.message.toasts.success.create);
             navigate('/');
         } catch (error) {
             console.log(error);
@@ -38,6 +40,10 @@ function AddPage() {
             </div>
         </section>
     );
+}
+
+AddPage.propTypes = {
+    addNote: PropTypes.func
 }
 
 export default AddPage;

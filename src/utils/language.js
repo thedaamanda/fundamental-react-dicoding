@@ -31,6 +31,16 @@ const appPage = {
             remainingCharacters: 'Sisa Karakter:',
             button: 'Buat Catatan',
         },
+        message: {
+            toasts: {
+                success: {
+                    create: 'Catatan berhasil ditambahkan',
+                    delete: 'Catatan telah dihapus.',
+                    archive: 'Catatan berhasil diarsipkan.',
+                    unarchive: 'Catatan dipulihkan dari arsip.',
+                },
+            },
+        },
         login: 'Masuk',
         register: 'Daftar',
     },
@@ -65,6 +75,16 @@ const appPage = {
             tagline: 'Note Form',
             remainingCharacters: 'Remaining Characters:',
             button: 'Create Note',
+        },
+        message: {
+            toasts: {
+                success: {
+                    create: 'Note successfully added',
+                    delete: 'Note has been deleted.',
+                    archive: 'Note successfully archived.',
+                    unarchive: 'Note restored from archive.',
+                },
+            },
         },
         login: 'Login',
         register: 'Register',
@@ -123,12 +143,24 @@ const registerPage = {
     }
 }
 
+const notFoundPage = {
+    id: {
+        description: 'Halaman yang anda tuju saat ini tidak tersedia. Hal ini mungkin karena halaman tidak ada atau telah dipindahkan.',
+        button: 'Kembali ke Beranda',
+    },
+    en: {
+        description: 'The page you are attempting to reach is currently not available. This may be because the page does not exist or has been moved.',
+        button: 'Back to Home',
+    }
+}
+
 const content = {
     appPage,
     homePage,
     archivedPage,
     loginPage,
     registerPage,
+    notFoundPage,
 }
 
 export default content

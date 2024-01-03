@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import RegisterInput from '../components/RegisterInput'
 import { register } from '../utils/network-data';
 import { Link, useNavigate } from 'react-router-dom';
@@ -37,6 +38,10 @@ function RegisterPage() {
             </div>
         </div>
     );
+}
+
+RegisterPage.propTypes = {
+    register: PropTypes.func
 }
 
 export default RegisterPage;

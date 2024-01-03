@@ -1,7 +1,7 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
 import { MdGTranslate } from 'react-icons/md';
-import useLocale from '../../hooks/useLocale'
-import LocaleContext from '../../contexts/LocaleContext'
+import useLocale from '../../hooks/useLocale';
+import LocaleContext from '../../contexts/LocaleContext';
 
 function LangToggler() {
     const { locale, changeLocale } = useContext(LocaleContext);
