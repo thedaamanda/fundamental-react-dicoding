@@ -25,4 +25,8 @@ function SkeletonLoading({ total }) {
     )
 }
 
+SkeletonLoading.propTypes = {
+    total: PropTypes.number
+}
+
 export default SkeletonLoading;

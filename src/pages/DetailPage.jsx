@@ -25,7 +25,7 @@ function DetailPage() {
             alert("Terjadi kesalahan saat mengambil data");
             setLoading(false);
         });
-    }, []);
+    }, [id]);
 
     const onArchiveHandler = async (id) => {
         let navigateTo = '/';

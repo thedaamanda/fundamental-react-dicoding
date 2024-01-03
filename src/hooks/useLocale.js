@@ -11,7 +11,7 @@ function useLocale() {
     React.useEffect(() => {
         const localLocale = localStorage.getItem('locale');
         localLocale && setLocale(localLocale);
-    });
+    }, []);
 
     return [locale, changeLocale];
 }
