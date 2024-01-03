@@ -8,6 +8,7 @@ import LocaleContext from './contexts/LocaleContext';
 import AuthContext from './contexts/AuthContext';
 import useTheme from './hooks/useTheme';
 import useLocale from './hooks/useLocale';
+import LoadingIndicator from './components/layouts/LoadingIndicator'
 
 function App() {
     const [theme, changeTheme] = useTheme();
@@ -36,6 +37,10 @@ function App() {
             setLoading(false);
         });
     }, []);
+
+    if (loading) {
+        return <LoadingIndicator />
+    }
 
     return (
         <ThemeContext.Provider value={themeContextValue}>
