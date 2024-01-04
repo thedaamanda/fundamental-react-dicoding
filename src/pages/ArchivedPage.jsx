@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getArchivedNotes } from '../utils/network-data';
-import Search from '../components/Search';
-import NoteList from '../components/NoteList';
-import NoteContainer from '../components/NoteContainer';
+import Search from '../components/layouts/Search';
+import NoteList from '../components/notes/NoteList';
+import NoteContainer from '../components/notes/NoteContainer';
 import { useSearchParams } from 'react-router-dom';
-import SkeletonLoading from '../components/SkeletonLoading'
+import SkeletonLoading from '../components/layouts/SkeletonLoading'
 import useLanguage from '../hooks/useLanguage'
 
 function ArchivedPage() {

@@ -1,38 +1,38 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { addNote } from '../utils/network-data';
-import NoteInput from '../components/NoteInput';
-import ImageHeader from '../components/ImageHeader';
+import NoteInput from '../components/notes/NoteInput';
+import ImageHeader from '../components/layouts/ImageHeader';
 import { toast } from 'react-toastify';
 import useLanguage from '../hooks/useLanguage';
 
 function AddPage() {
     const navigate = useNavigate();
-    const textToast = useLanguage('app');
+    const text = useLanguage('app');
 
     const onAddNoteHandler = async (note) => {
         try {
             await addNote({
                 title: note.title,
-                body: note.body
+                body: note.body,
             });
-            toast.success(textToast.message.toasts.success.create);
+            toast.success(text.message.toasts.success.create);
             navigate('/');
         } catch (error) {
-            console.log(error);
+            alert(text.message.alert.error.error);
         }
-    }
+    };
 
     return (
-        <section className="note-section">
-            <div className="note-container">
-                <div className="row-center">
-                    <div className="flex-item-left d-none">
+        <section className='note-section'>
+            <div className='note-container'>
+                <div className='row-center'>
+                    <div className='flex-item-left d-none'>
                         <ImageHeader />
                     </div>
-                    <div className="flex-item-right">
-                        <div className="note-wrapper">
+                    <div className='flex-item-right'>
+                        <div className='note-wrapper'>
                             <NoteInput addNote={onAddNoteHandler} />
                         </div>
                     </div>
@@ -43,7 +43,7 @@ function AddPage() {
 }
 
 AddPage.propTypes = {
-    addNote: PropTypes.func
-}
+    addNote: PropTypes.func,
+};
 
 export default AddPage;

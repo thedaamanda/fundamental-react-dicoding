@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import RegisterInput from '../components/RegisterInput';
+import RegisterInput from '../components/auth/RegisterInput';
 import { register } from '../utils/network-data';
 import { Link, useNavigate } from 'react-router-dom';
 import useLanguage from '../hooks/useLanguage';
@@ -19,7 +19,7 @@ function RegisterPage() {
                 navigate('/login');
             }
         } catch (error) {
-            console.log(error);
+            alert(textApp.message.alert.error.error);
         }
     };
 
