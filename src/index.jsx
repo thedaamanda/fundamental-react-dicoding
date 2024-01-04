@@ -6,6 +6,7 @@ import App from './App'
 import './styles/style.css';
 import './styles/responsive.css';
 import 'react-toastify/dist/ReactToastify.min.css';
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const root = createRoot(document.getElementById('root'));
 root.render(

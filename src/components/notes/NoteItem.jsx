@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import NoteItemDate from './NoteItemDate';
-import NoteItemBody from './NoteItemBody';
+import NoteItemDate from './note-item/NoteItemDate';
+import NoteItemBody from './note-item/NoteItemBody';
 
 function NoteItem({ id, title, body, createdAt }) {
     return (
-        <div className="list-content" id={id}>
+        <div className='list-content' id={id}>
             <NoteItemDate date={createdAt} />
             <NoteItemBody id={id} title={title} body={body} />
         </div>
-    )
+    );
 }
 
 NoteItem.propTypes = {
@@ -17,6 +17,6 @@ NoteItem.propTypes = {
     title: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
-}
+};
 
 export default NoteItem;

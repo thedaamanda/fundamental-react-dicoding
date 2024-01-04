@@ -1,73 +1,91 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import { getNote, deleteNote, archiveNote, unarchiveNote } from '../utils/local-data';
-import { useParams, useNavigate } from "react-router-dom";
+import {
+    getNote,
+    deleteNote,
+    archiveNote,
+    unarchiveNote,
+} from '../utils/network-data';
+import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import NotFound from "./NotFound";
-import DetailPageAction from "../components/DetailPageAction"
-import NoteDetail from "../components/NoteDetail"
+import NotFound from './NotFound';
+import DetailPageAction from '../components/actions/DetailPageAction';
+import NoteDetail from '../components/notes/NoteDetail';
+import useLanguage from '../hooks/useLanguage';
 
-function DetailPageWrapper() {
+function DetailPage() {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    return <DetailPage id={id} navigate={navigate}/>;
-}
+    const textToast = useLanguage('app');
 
-class DetailPage extends React.Component {
-    constructor(props) {
-        super(props);
+    const [note, setNote] = React.useState({});
+    const [loading, setLoading] = React.useState(true);
 
-        this.state = {
-            note: getNote(props.id)
-        };
+    React.useEffect(() => {
+        getNote(id)
+            .then(({ data }) => {
+                setNote(data);
+                setLoading(false);
+            })
+            .catch(() => {
+                alert('Terjadi kesalahan saat mengambil data');
+                setLoading(false);
+            });
+    }, [id]);
 
-        this.onArchiveHandler = this.onArchiveHandler.bind(this);
-        this.onDeleteHandler = this.onDeleteHandler.bind(this);
-    }
+    const onArchiveHandler = async (id) => {
+        let navigateTo = '/';
 
-    onArchiveHandler(id) {
-        if(this.state.note.archived) {
-            unarchiveNote(id);
-            toast.success("Catatan dipulihkan dari arsip");
+        if (note.archived) {
+            await unarchiveNote(id);
+
+            toast.success(textToast.message.toasts.success.unarchive);
+            navigateTo = '/archives';
         } else {
-            archiveNote(id);
-            toast.success("Catatan berhasil diarsipkan");
+            await archiveNote(id);
+
+            toast.success(textToast.message.toasts.success.archive);
         }
 
-        this.props.navigate('/');
+        navigate(navigateTo);
+    };
+
+    const onDeleteHandler = async (id) => {
+        await deleteNote(id);
+
+        toast.success(textToast.message.toasts.success.delete);
+        navigate('/');
+    };
+
+    if (!note) {
+        return <NotFound />;
     }
 
-    onDeleteHandler(id) {
-        deleteNote(id);
-
-        toast.success("Catatan telah dihapus");
-        this.props.navigate('/');
-    }
-
-    render() {
-        if (!this.state.note) {
-            return <NotFound />;
-        }
-
-        return (
-            <div>
-                <section className="result-section">
-                    <div className="padding-detail">
-                        <div className="result-container">
-                            <NoteDetail {...this.state.note} />
-                        </div>
+    return (
+        <div>
+            <section className='result-section'>
+                <div className='padding-detail'>
+                    <div className='result-container'>
+                        <NoteDetail {...note} />
                     </div>
-                </section>
-                <DetailPageAction id={this.props.id} archived={this.state.note.archived} onArchive={this.onArchiveHandler} onDelete={this.onDeleteHandler} />
-            </div>
-        );
-    }
+                </div>
+            </section>
+            <DetailPageAction
+                id={id}
+                archived={note.archived || false}
+                onArchive={onArchiveHandler}
+                onDelete={onDeleteHandler}
+            />
+        </div>
+    );
 }
 
 DetailPage.propTypes = {
-    id: PropTypes.string.isRequired,
-    navigate: PropTypes.func.isRequired,
-}
+    id: PropTypes.string,
+    archived: PropTypes.bool,
+    onArchive: PropTypes.func,
+    onDelete: PropTypes.func,
+};
 
-export default DetailPageWrapper;
+export default DetailPage;

@@ -1,37 +1,67 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { getUserLogged } from './utils/network-data'
 import Header from './components/layouts/Header';
 import { ToastContainer } from 'react-toastify';
-
-import HomePage from './pages/HomePage';
-import ArchivedPage from './pages/ArchivedPage';
-import AddPage from './pages/AddPage';
-import DetailPage from './pages/DetailPage';
-import NotFound from './pages/NotFound';
+import Routes from './routes';
+import ThemeContext from './contexts/ThemeContext';
+import LocaleContext from './contexts/LocaleContext';
+import AuthContext from './contexts/AuthContext';
+import useTheme from './hooks/useTheme';
+import useLocale from './hooks/useLocale';
+import LoadingIndicator from './components/layouts/LoadingIndicator'
 
 function App() {
+    const [theme, changeTheme] = useTheme();
+    const [locale, changeLocale] = useLocale();
+    const [auth, setAuth] = React.useState(null);
+    const [loading, setLoading] = React.useState(true);
+
+    const localeContextValue = React.useMemo(() => ({
+        locale,
+        changeLocale
+    }), [locale]);
+
+    const themeContextValue = React.useMemo(() => ({
+        theme,
+        changeTheme
+    }), [theme]);
+
+    const authContextValue = React.useMemo(() => ({
+        auth,
+        setAuth
+    }), [auth]);
+
+    React.useEffect(() => {
+        getUserLogged().then(({ data }) => {
+            setAuth(data);
+            setLoading(false);
+        });
+    }, []);
+
+    if (loading) {
+        return <LoadingIndicator />
+    }
+
     return (
-        <>
-            <Header />
-            <main>
-                <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/archives" element={<ArchivedPage />} />
-                    <Route path="/notes/new" element={<AddPage />} />
-                    <Route path="/notes/:id" element={<DetailPage />} />
-                    <Route path="*" element={<NotFound/>} />
-                </Routes>
-            </main>
-            <ToastContainer
-                position="top-right"
-                autoClose={1500}
-                hideProgressBar={true}
-                newestOnTop={false}
-                rtl={false}
-                pauseOnFocusLoss
-                pauseOnHover
-                theme="colored" />
-        </>
+        <ThemeContext.Provider value={themeContextValue}>
+            <LocaleContext.Provider value={localeContextValue}>
+                <AuthContext.Provider value={authContextValue}>
+                    <Header />
+                    <main>
+                        <Routes />
+                    </main>
+                    <ToastContainer
+                        position="top-right"
+                        autoClose={1500}
+                        hideProgressBar={true}
+                        newestOnTop={false}
+                        rtl={false}
+                        pauseOnFocusLoss
+                        pauseOnHover
+                        theme="colored" />
+                </AuthContext.Provider>
+            </LocaleContext.Provider>
+        </ThemeContext.Provider>
     )
 }
 

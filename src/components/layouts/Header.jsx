@@ -1,27 +1,44 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import AuthContext from '../../contexts/AuthContext';
+import ThemeToggler from './ThemeToggler';
+import LogoutButton from './LogoutButton';
+import LangToggler from './LangToggler';
+import useLanguage from '../../hooks/useLanguage';
 
 function Header() {
-  return (
-    <header className="template-header">
-        <div className="template-container">
-            <div className="header-inner">
-                <div className="header-left">
-                    <div className="brand-logo">
-                        <Link to="/">
-                            <h1>Note App</h1>
-                        </Link>
+    const { auth } = useContext(AuthContext);
+    const textApp = useLanguage('app');
+
+    return (
+        <header className='template-header'>
+            <div className='template-container'>
+                <div className='header-inner'>
+                    <div className='header-left'>
+                        <div className='brand-logo'>
+                            <Link to='/'>
+                                <h1>{textApp.appName}</h1>
+                            </Link>
+                        </div>
+                    </div>
+                    <div className='header-right'>
+                        {auth ? (
+                            <>
+                                <Link to='/archives' className='btn-archive'>
+                                    <h2>{textApp.header.archives}</h2>
+                                </Link>
+                            </>
+                        ) : (
+                            ''
+                        )}
+                        <LangToggler />
+                        <ThemeToggler />
+                        <LogoutButton />
                     </div>
                 </div>
-                <div className="header-right">
-                    <Link to="/archives">
-                        <h2>Archived Note</h2>
-                    </Link>
-                </div>
             </div>
-        </div>
-    </header>
-  )
+        </header>
+    );
 }
 
 export default Header;
