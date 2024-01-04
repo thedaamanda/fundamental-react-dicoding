@@ -46,8 +46,15 @@ const appPage = {
                 },
                 error: {
                     passwordNotMatch: 'Password dan konfirmasi password tidak sesuai.',
+                    error: 'Terjadi kesalahan. Silahkan coba lagi nanti.',
                 }
             }
+        },
+        list: {
+            empty: {
+                title: 'Tidak ada catatan',
+                description: 'Silahkan tambahkan catatan baru.',
+            },
         },
         login: 'Masuk',
         register: 'Daftar',
@@ -99,8 +106,15 @@ const appPage = {
                 },
                 error: {
                     passwordNotMatch: 'Password and confirmation password do not match.',
+                    error: 'Something went wrong. Please try again later.',
                 }
             }
+        },
+        list: {
+            empty: {
+                title: 'No notes',
+                description: 'Please add a new note.',
+            },
         },
         login: 'Login',
         register: 'Register',

@@ -55,6 +55,14 @@
     .preview-image {
         margin-bottom: 30px;
     }
+
+    .header-right a h2, .header-left a h1 {
+        font-size: 18px;
+    }
+
+    .template-header .logout-btn .logout-btn__text {
+        font-size: 18px;
+    }
 }
 
 @media (max-width: 575px) {
