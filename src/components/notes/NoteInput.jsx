@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import useLanguage from '../hooks/useLanguage';
+import useLanguage from '../../hooks/useLanguage';
 
 const CHAR_LIMIT = 50;
 

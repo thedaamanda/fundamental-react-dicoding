@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import NoteItem from './NoteItem';
+import useLanguage from '../../hooks/useLanguage';
 
 function NoteList({ noteList }) {
+    const text = useLanguage('app');
+
     return (
         <div className='list-result'>
             {noteList.length ? (
@@ -11,8 +14,8 @@ function NoteList({ noteList }) {
                 ))
             ) : (
                 <div className='empty-state'>
-                    <h3 className='title'>Tidak ada catatan</h3>
-                    <p className='body'>Silahkan tambahkan catatan baru</p>
+                    <h3 className='title'>{text.list.empty.title}</h3>
+                    <p className='body'>{text.list.empty.description}</p>
                 </div>
             )}
         </div>

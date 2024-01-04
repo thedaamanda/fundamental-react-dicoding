@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { showFormattedDate } from '../utils/index';
+import { showFormattedDate } from '../../utils/index';
 import parser from 'html-react-parser';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-import useTheme from '../hooks/useTheme';
+import useTheme from '../../hooks/useTheme';
 
 function NoteDetail({ title, body, createdAt }) {
     const [theme] = useTheme();

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import useLanguage from '../hooks/useLanguage';
+import useLanguage from '../../hooks/useLanguage';
 
 function Search({ searchKeyword, onSearch }) {
     const textSearch = useLanguage('app');

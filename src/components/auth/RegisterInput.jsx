@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import useInput from '../hooks/useInput';
-import useLanguage from '../hooks/useLanguage';
+import useInput from '../../hooks/useInput';
+import useLanguage from '../../hooks/useLanguage';
 
 function RegisterInput({ register }) {
     const [name, onNameChange] = useInput('');

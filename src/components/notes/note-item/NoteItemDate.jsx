@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { showFormattedDate } from '../utils/index';
+import { showFormattedDate } from '../../../utils/index';
 import { MdOutlineDateRange } from 'react-icons/md';
 
 function NoteItemDate({ date }) {

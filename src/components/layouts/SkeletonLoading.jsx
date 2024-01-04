@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
-import useTheme from '../hooks/useTheme';
+import useTheme from '../../hooks/useTheme';
 
 function SkeletonLoading({ total }) {
     const [ theme ] = useTheme();

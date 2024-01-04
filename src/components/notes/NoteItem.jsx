@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import NoteItemDate from './NoteItemDate';
-import NoteItemBody from './NoteItemBody';
+import NoteItemDate from './note-item/NoteItemDate';
+import NoteItemBody from './note-item/NoteItemBody';
 
 function NoteItem({ id, title, body, createdAt }) {
     return (
